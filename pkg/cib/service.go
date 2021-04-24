@@ -7,10 +7,10 @@ import (
 
 	"github.com/containerd/containerd/platforms"
 	"github.com/docker/distribution/reference"
-	"github.com/docker/docker/builder/dockerignore"
 	"github.com/moby/buildkit/client/llb"
 	dockerfile "github.com/moby/buildkit/frontend/dockerfile/builder"
 	"github.com/moby/buildkit/frontend/dockerfile/dockerfile2llb"
+	"github.com/moby/buildkit/frontend/dockerfile/dockerignore"
 	"github.com/moby/buildkit/frontend/gateway/client"
 	"github.com/moby/buildkit/util/apicaps"
 	specs "github.com/opencontainers/image-spec/specs-go/v1"

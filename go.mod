@@ -5,7 +5,7 @@ go 1.15
 require (
 	github.com/containerd/containerd v1.4.4
 	github.com/docker/distribution v2.7.1+incompatible
-	github.com/docker/docker v20.10.6+incompatible
+	github.com/docker/docker v20.10.6+incompatible // indirect
 	github.com/golang/mock v1.5.0
 	github.com/golang/protobuf v1.4.3 // indirect
 	github.com/google/go-cmp v0.5.4 // indirect
