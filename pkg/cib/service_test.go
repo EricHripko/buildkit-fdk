@@ -503,3 +503,136 @@ func TestGetTargetPlatformsExplicitSucceeds(t *testing.T) {
 	require.Equal(t, platforms[0].Architecture, "amd64")
 	require.Equal(t, platforms[0].OS, "linux")
 }
+
+func TestGetCacheImportsNone(t *testing.T) {
+	// Arrange
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+	cli := cib_mock.NewMockClient(ctrl)
+	cli.EXPECT().
+		BuildOpts().
+		Return(client.BuildOpts{
+			Opts: map[string]string{},
+		}).
+		Times(2)
+	build := NewService(context.Background(), cli)
+
+	// Act
+	imports, err := build.GetCacheImports()
+
+	// Assert
+	require.Nil(t, err)
+	require.Len(t, imports, 0)
+}
+
+func TestGetCacheImportsOld(t *testing.T) {
+	// Arrange
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+	cli := cib_mock.NewMockClient(ctrl)
+	cli.EXPECT().
+		BuildOpts().
+		Return(client.BuildOpts{
+			Opts: map[string]string{
+				keyCacheFrom: "image1,image2",
+			},
+		}).
+		Times(2)
+	build := NewService(context.Background(), cli)
+	expected := []client.CacheOptionsEntry{
+		client.CacheOptionsEntry{
+			Type: "registry",
+			Attrs: map[string]string{
+				"ref": "image1",
+			},
+		},
+		client.CacheOptionsEntry{
+			Type: "registry",
+			Attrs: map[string]string{
+				"ref": "image2",
+			},
+		},
+	}
+
+	// Act
+	actual, err := build.GetCacheImports()
+
+	// Assert
+	require.Nil(t, err)
+	require.ElementsMatch(t, expected, actual)
+}
+
+func TestGetCacheImportsNewInvalid(t *testing.T) {
+	// Arrange
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+	cli := cib_mock.NewMockClient(ctrl)
+	cli.EXPECT().
+		BuildOpts().
+		Return(client.BuildOpts{
+			Opts: map[string]string{
+				keyCacheImports: "not-a-valid-json",
+			},
+		})
+	build := NewService(context.Background(), cli)
+
+	// Act
+	_, err := build.GetCacheImports()
+
+	// Assert
+	require.NotNil(t, err)
+}
+
+func TestGetCacheImportsNew(t *testing.T) {
+	// Arrange
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+	cli := cib_mock.NewMockClient(ctrl)
+	cli.EXPECT().
+		BuildOpts().
+		Return(client.BuildOpts{
+			Opts: map[string]string{
+				keyCacheImports: `
+				[
+					{
+						"Type": "registry",
+						"Attrs": {
+							"ref": "image1"
+						}
+					},
+					{
+						"Type": "local",
+						"Attrs": {
+							"src": "path/to/input-dir",
+							"digest": "sha256:deadbeef"
+						}
+					}
+				]
+				`,
+			},
+		}).
+		Times(2)
+	build := NewService(context.Background(), cli)
+	expected := []client.CacheOptionsEntry{
+		client.CacheOptionsEntry{
+			Type: "registry",
+			Attrs: map[string]string{
+				"ref": "image1",
+			},
+		},
+		client.CacheOptionsEntry{
+			Type: "local",
+			Attrs: map[string]string{
+				"src":    "path/to/input-dir",
+				"digest": "sha256:deadbeef",
+			},
+		},
+	}
+
+	// Act
+	actual, err := build.GetCacheImports()
+
+	// Assert
+	require.Nil(t, err)
+	require.ElementsMatch(t, expected, actual)
+}

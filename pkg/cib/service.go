@@ -4,9 +4,11 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"strings"
 
 	"github.com/containerd/containerd/platforms"
 	"github.com/docker/distribution/reference"
+	controlapi "github.com/moby/buildkit/api/services/control"
 	"github.com/moby/buildkit/client/llb"
 	dockerfile "github.com/moby/buildkit/frontend/dockerfile/builder"
 	"github.com/moby/buildkit/frontend/dockerfile/dockerfile2llb"
@@ -206,6 +208,37 @@ func (s *service) GetTargetPlatforms() (platforms []*specs.Platform, err error) 
 		platforms = []*specs.Platform{s.GetBuildPlatform()}
 	}
 	return
+}
+
+func (s *service) GetCacheImports() ([]client.CacheOptionsEntry, error) {
+	// Taken from https://github.com/moby/buildkit/blob/4e69662758446c7dc0e6de2bc1f7973d03bacbed/frontend/dockerfile/builder/build.go#L439
+	// for compatibility
+	var cacheImports []client.CacheOptionsEntry
+	// new API
+	if cacheImportsStr := s.GetOpts()[keyCacheImports]; cacheImportsStr != "" {
+		var cacheImportsUM []controlapi.CacheOptionsEntry
+		if err := json.Unmarshal([]byte(cacheImportsStr), &cacheImportsUM); err != nil {
+			return nil, errors.Wrapf(err, "failed to unmarshal %s (%q)", keyCacheImports, cacheImportsStr)
+		}
+		for _, um := range cacheImportsUM {
+			cacheImports = append(cacheImports, client.CacheOptionsEntry{Type: um.Type, Attrs: um.Attrs})
+		}
+	}
+	// old API
+	if cacheFromStr := s.GetOpts()[keyCacheFrom]; cacheFromStr != "" {
+		cacheFrom := strings.Split(cacheFromStr, ",")
+		for _, s := range cacheFrom {
+			im := client.CacheOptionsEntry{
+				Type: "registry",
+				Attrs: map[string]string{
+					"ref": s,
+				},
+			}
+			// FIXME(AkihiroSuda): skip append if already exists
+			cacheImports = append(cacheImports, im)
+		}
+	}
+	return cacheImports, nil
 }
 
 func (s *service) GetIgnoreCache() bool {
