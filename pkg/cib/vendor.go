@@ -18,6 +18,8 @@ const (
 	dockerignoreFilename = ".dockerignore"
 	keyImageResolveMode  = "image-resolve-mode"
 	keyFilename          = "filename"
+	keyCacheFrom         = "cache-from"    // for registry only. deprecated in favor of keyCacheImports
+	keyCacheImports      = "cache-imports" // JSON representation of []CacheOptionsEntry
 	keyTargetPlatform    = "platform"
 	keyNoCache           = "no-cache"
 )

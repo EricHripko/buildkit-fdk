@@ -37,6 +37,8 @@ type Service interface {
 	GetBuildPlatform() *specs.Platform
 	// GetTargetPlatforms returns the list of target platforms for the image(s) being built.
 	GetTargetPlatforms() ([]*specs.Platform, error)
+	// GetCacheImports returns the list of external cache sources to use in the build.
+	GetCacheImports() ([]client.CacheOptionsEntry, error)
 	// GetIgnoreCache indicates whether the cache should be ignored.
 	GetIgnoreCache() bool
 
