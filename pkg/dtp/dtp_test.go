@@ -36,7 +36,7 @@ type invalidTypeClient struct {
 
 func TestUnexpectedType(t *testing.T) {
 	// Arrange
-	client := &invalidTypeClient{}
+	client := &invalidTypeClient{client: "hello"}
 
 	// Act
 	err := InjectDockerfileTransform(noOpTransform, client)
