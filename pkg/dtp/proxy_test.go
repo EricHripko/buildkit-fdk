@@ -6,12 +6,12 @@ import (
 	"testing"
 
 	dtp_mock "github.com/EricHripko/buildkit-fdk/pkg/dtp/mock"
-	"google.golang.org/grpc"
 
 	"github.com/golang/mock/gomock"
 	pb "github.com/moby/buildkit/frontend/gateway/pb"
 	"github.com/stretchr/testify/require"
 	"github.com/stretchr/testify/suite"
+	"google.golang.org/grpc"
 )
 
 func TestNewDefaultDockerfile(t *testing.T) {
