@@ -38,8 +38,8 @@ func build(t *testing.T, tag string, context string) {
 }
 
 const (
-	tagTestFrontend = "erichripko/simple-frontend"
-	tagTestImage    = "erichripko/simple-frontend-test"
+	tagTestFrontend = "erichripko/ubuntu-dockerfile"
+	tagTestImage    = "erichripko/ubuntu-dockerfile-test"
 )
 
 func TestSimpleFrontend(t *testing.T) {
