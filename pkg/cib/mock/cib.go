@@ -97,6 +97,21 @@ func (mr *MockServiceMockRecorder) GetBuildPlatform() *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetBuildPlatform", reflect.TypeOf((*MockService)(nil).GetBuildPlatform))
 }
 
+// GetCacheImports mocks base method
+func (m *MockService) GetCacheImports() ([]client.CacheOptionsEntry, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetCacheImports")
+	ret0, _ := ret[0].([]client.CacheOptionsEntry)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetCacheImports indicates an expected call of GetCacheImports
+func (mr *MockServiceMockRecorder) GetCacheImports() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCacheImports", reflect.TypeOf((*MockService)(nil).GetCacheImports))
+}
+
 // GetCaps mocks base method
 func (m *MockService) GetCaps() apicaps.CapSet {
 	m.ctrl.T.Helper()
@@ -138,6 +153,21 @@ func (m *MockService) GetIgnoreCache() bool {
 func (mr *MockServiceMockRecorder) GetIgnoreCache() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetIgnoreCache", reflect.TypeOf((*MockService)(nil).GetIgnoreCache))
+}
+
+// GetIsMultiPlatform mocks base method
+func (m *MockService) GetIsMultiPlatform() (bool, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetIsMultiPlatform")
+	ret0, _ := ret[0].(bool)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetIsMultiPlatform indicates an expected call of GetIsMultiPlatform
+func (mr *MockServiceMockRecorder) GetIsMultiPlatform() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetIsMultiPlatform", reflect.TypeOf((*MockService)(nil).GetIsMultiPlatform))
 }
 
 // GetMarshalOpts mocks base method
