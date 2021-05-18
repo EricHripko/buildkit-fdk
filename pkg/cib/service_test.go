@@ -18,6 +18,9 @@ import (
 	"github.com/stretchr/testify/suite"
 )
 
+// Ensure that mocks are up-to-date
+var _ Service = &cib_mock.MockService{}
+
 func TestNewServiceSucceeds(t *testing.T) {
 	// Act
 	build := NewService(context.Background(), nil)
