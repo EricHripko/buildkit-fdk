@@ -20,6 +20,7 @@ const (
 	keyFilename          = "filename"
 	keyCacheFrom         = "cache-from"    // for registry only. deprecated in favor of keyCacheImports
 	keyCacheImports      = "cache-imports" // JSON representation of []CacheOptionsEntry
+	keyMultiPlatform     = "multi-platform"
 	keyTargetPlatform    = "platform"
 	keyNoCache           = "no-cache"
 )

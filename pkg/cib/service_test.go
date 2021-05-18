@@ -636,3 +636,140 @@ func TestGetCacheImportsNew(t *testing.T) {
 	require.Nil(t, err)
 	require.ElementsMatch(t, expected, actual)
 }
+
+func TestGetIsMultiPlatformFails(t *testing.T) {
+	// Arrange
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+	cli := cib_mock.NewMockClient(ctrl)
+	cli.EXPECT().
+		BuildOpts().
+		Return(client.BuildOpts{
+			Opts: map[string]string{
+				keyTargetPlatform: "vtx:cpu32",
+			},
+		})
+	build := NewService(context.Background(), cli)
+
+	// Act
+	_, err := build.GetIsMultiPlatform()
+
+	// Assert
+	require.NotNil(t, err)
+}
+
+func TestGetIsMultiPlatformCannotParse(t *testing.T) {
+	// Arrange
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+	cli := cib_mock.NewMockClient(ctrl)
+	cli.EXPECT().
+		BuildOpts().
+		Return(client.BuildOpts{
+			Opts: map[string]string{
+				keyTargetPlatform: "linux/amd64",
+				keyMultiPlatform:  "nope",
+			},
+		}).
+		Times(2)
+	build := NewService(context.Background(), cli)
+
+	// Act
+	_, err := build.GetIsMultiPlatform()
+
+	// Assert
+	require.NotNil(t, err)
+}
+
+func TestGetIsMultiPlatformConflict(t *testing.T) {
+	// Arrange
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+	cli := cib_mock.NewMockClient(ctrl)
+	cli.EXPECT().
+		BuildOpts().
+		Return(client.BuildOpts{
+			Opts: map[string]string{
+				keyTargetPlatform: "linux/amd64,linux/arm64",
+				keyMultiPlatform:  "false",
+			},
+		}).
+		Times(2)
+	build := NewService(context.Background(), cli)
+
+	// Act
+	_, err := build.GetIsMultiPlatform()
+
+	// Assert
+	require.NotNil(t, err)
+}
+
+func TestGetIsMultiPlatformFalseImplicit(t *testing.T) {
+	// Arrange
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+	cli := cib_mock.NewMockClient(ctrl)
+	cli.EXPECT().
+		BuildOpts().
+		Return(client.BuildOpts{
+			Opts: map[string]string{
+				keyTargetPlatform: "linux/amd64",
+			},
+		}).
+		Times(2)
+	build := NewService(context.Background(), cli)
+
+	// Act
+	multiPlatform, err := build.GetIsMultiPlatform()
+
+	// Assert
+	require.Nil(t, err)
+	require.False(t, multiPlatform)
+}
+
+func TestGetIsMultiPlatformTrueImplicit(t *testing.T) {
+	// Arrange
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+	cli := cib_mock.NewMockClient(ctrl)
+	cli.EXPECT().
+		BuildOpts().
+		Return(client.BuildOpts{
+			Opts: map[string]string{
+				keyTargetPlatform: "linux/amd64,linux/arm64",
+			},
+		}).
+		Times(2)
+	build := NewService(context.Background(), cli)
+
+	// Act
+	multiPlatform, err := build.GetIsMultiPlatform()
+
+	// Assert
+	require.Nil(t, err)
+	require.True(t, multiPlatform)
+}
+
+func TestGetIsMultiPlatformTrueExplicit(t *testing.T) {
+	// Arrange
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+	cli := cib_mock.NewMockClient(ctrl)
+	cli.EXPECT().
+		BuildOpts().
+		Return(client.BuildOpts{
+			Opts: map[string]string{
+				keyTargetPlatform: "linux/amd64",
+				keyMultiPlatform:  "true",
+			},
+		}).
+		Times(2)
+	build := NewService(context.Background(), cli)
+
+	// Act
+	multiPlatform, err := build.GetIsMultiPlatform()
+
+	// Assert
+	require.Nil(t, err)
+	require.True(t, multiPlatform)
+}

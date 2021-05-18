@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"strconv"
 	"strings"
 
 	"github.com/containerd/containerd/platforms"
@@ -208,6 +209,26 @@ func (s *service) GetTargetPlatforms() (platforms []*specs.Platform, err error) 
 		platforms = []*specs.Platform{s.GetBuildPlatform()}
 	}
 	return
+}
+
+func (s *service) GetIsMultiPlatform() (bool, error) {
+	targetPlatforms, err := s.GetTargetPlatforms()
+	if err != nil {
+		return false, err
+	}
+
+	multiPlatform := len(targetPlatforms) > 1
+	if v := s.GetOpts()[keyMultiPlatform]; v != "" {
+		b, err := strconv.ParseBool(v)
+		if err != nil {
+			return false, errors.Errorf("invalid boolean value %s", v)
+		}
+		if !b && multiPlatform {
+			return false, errors.Errorf("returning multiple target plaforms is not allowed")
+		}
+		multiPlatform = b
+	}
+	return multiPlatform, nil
 }
 
 func (s *service) GetCacheImports() ([]client.CacheOptionsEntry, error) {

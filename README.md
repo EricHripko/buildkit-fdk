@@ -1,5 +1,9 @@
 # Frontend Development kit for BuildKit
 
+[![Go Report](https://goreportcard.com/badge/github.com/EricHripko/buildkit-fdk)](https://goreportcard.com/report/github.com/EricHripko/buildkit-fdk)
+![CI](https://github.com/EricHripko/buildkit-fdk/actions/workflows/ci.yml/badge.svg)
+[![codecov](https://codecov.io/gh/EricHripko/buildkit-fdk/branch/main/graph/badge.svg?token=HocgcUbyyD)](https://codecov.io/gh/EricHripko/buildkit-fdk)
+
 This repository houses the frontend Development Kit for [BuildKit](https://github.com/moby/buildkit).
 It aims to make the development of custom frontends easier by removing
 the unnecessary boilerplate. Generally speaking, there's _3_ ways to make use
