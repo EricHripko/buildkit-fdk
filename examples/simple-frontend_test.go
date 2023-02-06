@@ -2,24 +2,29 @@ package examples_test
 
 import (
 	"bytes"
+	"context"
 	"os"
 	"os/exec"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/require"
 )
 
-func build(t *testing.T, tag string, context string) {
+func build(t *testing.T, tag string, workspace string) {
 	// Arrange
 	var stderr bytes.Buffer
 	var stdout bytes.Buffer
-	cmd := exec.Command(
+	ctx, cancel := context.WithTimeout(context.Background(), time.Minute*4)
+	defer cancel()
+	cmd := exec.CommandContext(
+		ctx,
 		"docker",
 		"build",
 		"-t",
 		tag,
-		context,
+		workspace,
 	)
 	cmd.Stderr = &stderr
 	cmd.Stdout = &stdout
