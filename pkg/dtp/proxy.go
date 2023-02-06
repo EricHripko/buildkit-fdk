@@ -79,3 +79,7 @@ func (proxy *dockerfileTransformingLLBProxy) ReleaseContainer(ctx context.Contex
 func (proxy *dockerfileTransformingLLBProxy) ExecProcess(ctx context.Context, opts ...grpc.CallOption) (pb.LLBBridge_ExecProcessClient, error) {
 	return proxy.client.ExecProcess(ctx, opts...)
 }
+
+func (proxy *dockerfileTransformingLLBProxy) Warn(ctx context.Context, in *pb.WarnRequest, opts ...grpc.CallOption) (*pb.WarnResponse, error) {
+	return proxy.client.Warn(ctx, in, opts...)
+}

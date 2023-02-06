@@ -6,39 +6,40 @@ package cib_mock
 
 import (
 	context "context"
+	reflect "reflect"
+
 	gomock "github.com/golang/mock/gomock"
 	llb "github.com/moby/buildkit/client/llb"
 	dockerfile2llb "github.com/moby/buildkit/frontend/dockerfile/dockerfile2llb"
 	client "github.com/moby/buildkit/frontend/gateway/client"
 	apicaps "github.com/moby/buildkit/util/apicaps"
 	v1 "github.com/opencontainers/image-spec/specs-go/v1"
-	reflect "reflect"
 )
 
-// MockService is a mock of Service interface
+// MockService is a mock of Service interface.
 type MockService struct {
 	ctrl     *gomock.Controller
 	recorder *MockServiceMockRecorder
 }
 
-// MockServiceMockRecorder is the mock recorder for MockService
+// MockServiceMockRecorder is the mock recorder for MockService.
 type MockServiceMockRecorder struct {
 	mock *MockService
 }
 
-// NewMockService creates a new mock instance
+// NewMockService creates a new mock instance.
 func NewMockService(ctrl *gomock.Controller) *MockService {
 	mock := &MockService{ctrl: ctrl}
 	mock.recorder = &MockServiceMockRecorder{mock}
 	return mock
 }
 
-// EXPECT returns an object that allows the caller to indicate expected use
+// EXPECT returns an object that allows the caller to indicate expected use.
 func (m *MockService) EXPECT() *MockServiceMockRecorder {
 	return m.recorder
 }
 
-// FetchImageConfig mocks base method
+// FetchImageConfig mocks base method.
 func (m *MockService) FetchImageConfig(arg0 string, arg1 *v1.Platform) (dockerfile2llb.Image, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "FetchImageConfig", arg0, arg1)
@@ -47,13 +48,13 @@ func (m *MockService) FetchImageConfig(arg0 string, arg1 *v1.Platform) (dockerfi
 	return ret0, ret1
 }
 
-// FetchImageConfig indicates an expected call of FetchImageConfig
+// FetchImageConfig indicates an expected call of FetchImageConfig.
 func (mr *MockServiceMockRecorder) FetchImageConfig(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "FetchImageConfig", reflect.TypeOf((*MockService)(nil).FetchImageConfig), arg0, arg1)
 }
 
-// From mocks base method
+// From mocks base method.
 func (m *MockService) From(arg0 string, arg1 *v1.Platform, arg2 string) (llb.State, *dockerfile2llb.Image, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "From", arg0, arg1, arg2)
@@ -63,13 +64,13 @@ func (m *MockService) From(arg0 string, arg1 *v1.Platform, arg2 string) (llb.Sta
 	return ret0, ret1, ret2
 }
 
-// From indicates an expected call of From
+// From indicates an expected call of From.
 func (mr *MockServiceMockRecorder) From(arg0, arg1, arg2 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "From", reflect.TypeOf((*MockService)(nil).From), arg0, arg1, arg2)
 }
 
-// GetBuildArgs mocks base method
+// GetBuildArgs mocks base method.
 func (m *MockService) GetBuildArgs() map[string]string {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetBuildArgs")
@@ -77,13 +78,13 @@ func (m *MockService) GetBuildArgs() map[string]string {
 	return ret0
 }
 
-// GetBuildArgs indicates an expected call of GetBuildArgs
+// GetBuildArgs indicates an expected call of GetBuildArgs.
 func (mr *MockServiceMockRecorder) GetBuildArgs() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetBuildArgs", reflect.TypeOf((*MockService)(nil).GetBuildArgs))
 }
 
-// GetBuildPlatform mocks base method
+// GetBuildPlatform mocks base method.
 func (m *MockService) GetBuildPlatform() *v1.Platform {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetBuildPlatform")
@@ -91,13 +92,13 @@ func (m *MockService) GetBuildPlatform() *v1.Platform {
 	return ret0
 }
 
-// GetBuildPlatform indicates an expected call of GetBuildPlatform
+// GetBuildPlatform indicates an expected call of GetBuildPlatform.
 func (mr *MockServiceMockRecorder) GetBuildPlatform() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetBuildPlatform", reflect.TypeOf((*MockService)(nil).GetBuildPlatform))
 }
 
-// GetCacheImports mocks base method
+// GetCacheImports mocks base method.
 func (m *MockService) GetCacheImports() ([]client.CacheOptionsEntry, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetCacheImports")
@@ -106,13 +107,13 @@ func (m *MockService) GetCacheImports() ([]client.CacheOptionsEntry, error) {
 	return ret0, ret1
 }
 
-// GetCacheImports indicates an expected call of GetCacheImports
+// GetCacheImports indicates an expected call of GetCacheImports.
 func (mr *MockServiceMockRecorder) GetCacheImports() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCacheImports", reflect.TypeOf((*MockService)(nil).GetCacheImports))
 }
 
-// GetCaps mocks base method
+// GetCaps mocks base method.
 func (m *MockService) GetCaps() apicaps.CapSet {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetCaps")
@@ -120,13 +121,13 @@ func (m *MockService) GetCaps() apicaps.CapSet {
 	return ret0
 }
 
-// GetCaps indicates an expected call of GetCaps
+// GetCaps indicates an expected call of GetCaps.
 func (mr *MockServiceMockRecorder) GetCaps() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCaps", reflect.TypeOf((*MockService)(nil).GetCaps))
 }
 
-// GetExcludes mocks base method
+// GetExcludes mocks base method.
 func (m *MockService) GetExcludes() ([]string, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetExcludes")
@@ -135,13 +136,13 @@ func (m *MockService) GetExcludes() ([]string, error) {
 	return ret0, ret1
 }
 
-// GetExcludes indicates an expected call of GetExcludes
+// GetExcludes indicates an expected call of GetExcludes.
 func (mr *MockServiceMockRecorder) GetExcludes() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetExcludes", reflect.TypeOf((*MockService)(nil).GetExcludes))
 }
 
-// GetIgnoreCache mocks base method
+// GetIgnoreCache mocks base method.
 func (m *MockService) GetIgnoreCache() bool {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetIgnoreCache")
@@ -149,13 +150,13 @@ func (m *MockService) GetIgnoreCache() bool {
 	return ret0
 }
 
-// GetIgnoreCache indicates an expected call of GetIgnoreCache
+// GetIgnoreCache indicates an expected call of GetIgnoreCache.
 func (mr *MockServiceMockRecorder) GetIgnoreCache() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetIgnoreCache", reflect.TypeOf((*MockService)(nil).GetIgnoreCache))
 }
 
-// GetIsMultiPlatform mocks base method
+// GetIsMultiPlatform mocks base method.
 func (m *MockService) GetIsMultiPlatform() (bool, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetIsMultiPlatform")
@@ -164,13 +165,13 @@ func (m *MockService) GetIsMultiPlatform() (bool, error) {
 	return ret0, ret1
 }
 
-// GetIsMultiPlatform indicates an expected call of GetIsMultiPlatform
+// GetIsMultiPlatform indicates an expected call of GetIsMultiPlatform.
 func (mr *MockServiceMockRecorder) GetIsMultiPlatform() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetIsMultiPlatform", reflect.TypeOf((*MockService)(nil).GetIsMultiPlatform))
 }
 
-// GetMarshalOpts mocks base method
+// GetMarshalOpts mocks base method.
 func (m *MockService) GetMarshalOpts() []llb.ConstraintsOpt {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetMarshalOpts")
@@ -178,13 +179,13 @@ func (m *MockService) GetMarshalOpts() []llb.ConstraintsOpt {
 	return ret0
 }
 
-// GetMarshalOpts indicates an expected call of GetMarshalOpts
+// GetMarshalOpts indicates an expected call of GetMarshalOpts.
 func (mr *MockServiceMockRecorder) GetMarshalOpts() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMarshalOpts", reflect.TypeOf((*MockService)(nil).GetMarshalOpts))
 }
 
-// GetMetadata mocks base method
+// GetMetadata mocks base method.
 func (m *MockService) GetMetadata() ([]byte, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetMetadata")
@@ -193,13 +194,13 @@ func (m *MockService) GetMetadata() ([]byte, error) {
 	return ret0, ret1
 }
 
-// GetMetadata indicates an expected call of GetMetadata
+// GetMetadata indicates an expected call of GetMetadata.
 func (mr *MockServiceMockRecorder) GetMetadata() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMetadata", reflect.TypeOf((*MockService)(nil).GetMetadata))
 }
 
-// GetMetadataFileName mocks base method
+// GetMetadataFileName mocks base method.
 func (m *MockService) GetMetadataFileName() string {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetMetadataFileName")
@@ -207,13 +208,13 @@ func (m *MockService) GetMetadataFileName() string {
 	return ret0
 }
 
-// GetMetadataFileName indicates an expected call of GetMetadataFileName
+// GetMetadataFileName indicates an expected call of GetMetadataFileName.
 func (mr *MockServiceMockRecorder) GetMetadataFileName() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetMetadataFileName", reflect.TypeOf((*MockService)(nil).GetMetadataFileName))
 }
 
-// GetOpts mocks base method
+// GetOpts mocks base method.
 func (m *MockService) GetOpts() map[string]string {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetOpts")
@@ -221,13 +222,13 @@ func (m *MockService) GetOpts() map[string]string {
 	return ret0
 }
 
-// GetOpts indicates an expected call of GetOpts
+// GetOpts indicates an expected call of GetOpts.
 func (mr *MockServiceMockRecorder) GetOpts() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOpts", reflect.TypeOf((*MockService)(nil).GetOpts))
 }
 
-// GetResolveMode mocks base method
+// GetResolveMode mocks base method.
 func (m *MockService) GetResolveMode() (llb.ResolveMode, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetResolveMode")
@@ -236,13 +237,13 @@ func (m *MockService) GetResolveMode() (llb.ResolveMode, error) {
 	return ret0, ret1
 }
 
-// GetResolveMode indicates an expected call of GetResolveMode
+// GetResolveMode indicates an expected call of GetResolveMode.
 func (mr *MockServiceMockRecorder) GetResolveMode() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetResolveMode", reflect.TypeOf((*MockService)(nil).GetResolveMode))
 }
 
-// GetTargetPlatforms mocks base method
+// GetTargetPlatforms mocks base method.
 func (m *MockService) GetTargetPlatforms() ([]*v1.Platform, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetTargetPlatforms")
@@ -251,13 +252,13 @@ func (m *MockService) GetTargetPlatforms() ([]*v1.Platform, error) {
 	return ret0, ret1
 }
 
-// GetTargetPlatforms indicates an expected call of GetTargetPlatforms
+// GetTargetPlatforms indicates an expected call of GetTargetPlatforms.
 func (mr *MockServiceMockRecorder) GetTargetPlatforms() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTargetPlatforms", reflect.TypeOf((*MockService)(nil).GetTargetPlatforms))
 }
 
-// Solve mocks base method
+// Solve mocks base method.
 func (m *MockService) Solve(arg0 context.Context, arg1 llb.State) (client.Reference, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Solve", arg0, arg1)
@@ -266,13 +267,13 @@ func (m *MockService) Solve(arg0 context.Context, arg1 llb.State) (client.Refere
 	return ret0, ret1
 }
 
-// Solve indicates an expected call of Solve
+// Solve indicates an expected call of Solve.
 func (mr *MockServiceMockRecorder) Solve(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Solve", reflect.TypeOf((*MockService)(nil).Solve), arg0, arg1)
 }
 
-// Src mocks base method
+// Src mocks base method.
 func (m *MockService) Src() (client.Reference, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Src")
@@ -281,13 +282,13 @@ func (m *MockService) Src() (client.Reference, error) {
 	return ret0, ret1
 }
 
-// Src indicates an expected call of Src
+// Src indicates an expected call of Src.
 func (mr *MockServiceMockRecorder) Src() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Src", reflect.TypeOf((*MockService)(nil).Src))
 }
 
-// SrcState mocks base method
+// SrcState mocks base method.
 func (m *MockService) SrcState() (llb.State, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "SrcState")
@@ -296,7 +297,7 @@ func (m *MockService) SrcState() (llb.State, error) {
 	return ret0, ret1
 }
 
-// SrcState indicates an expected call of SrcState
+// SrcState indicates an expected call of SrcState.
 func (mr *MockServiceMockRecorder) SrcState() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SrcState", reflect.TypeOf((*MockService)(nil).SrcState))
