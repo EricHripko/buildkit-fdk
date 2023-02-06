@@ -30,6 +30,12 @@ jobs:
       - name: Build
         run: go build -v ./...
 
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
       - name: Package
         uses: docker/build-push-action@v2
         with:
@@ -50,13 +56,6 @@ jobs:
 
       - name: Upload coverage
         uses: codecov/codecov-action@v1
-
-      - name: Login to DockerHub
-        if: ${{ github.ref == 'refs/heads/main' && success() }}
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Release
         if: ${{ github.ref == 'refs/heads/main' && success() }}
