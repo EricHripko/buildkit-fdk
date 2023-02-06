@@ -6,37 +6,38 @@ package dtp_mock
 
 import (
 	context "context"
+	reflect "reflect"
+
 	gomock "github.com/golang/mock/gomock"
 	moby_buildkit_v1_frontend "github.com/moby/buildkit/frontend/gateway/pb"
 	grpc "google.golang.org/grpc"
 	metadata "google.golang.org/grpc/metadata"
-	reflect "reflect"
 )
 
-// MockLLBBridgeClient is a mock of LLBBridgeClient interface
+// MockLLBBridgeClient is a mock of LLBBridgeClient interface.
 type MockLLBBridgeClient struct {
 	ctrl     *gomock.Controller
 	recorder *MockLLBBridgeClientMockRecorder
 }
 
-// MockLLBBridgeClientMockRecorder is the mock recorder for MockLLBBridgeClient
+// MockLLBBridgeClientMockRecorder is the mock recorder for MockLLBBridgeClient.
 type MockLLBBridgeClientMockRecorder struct {
 	mock *MockLLBBridgeClient
 }
 
-// NewMockLLBBridgeClient creates a new mock instance
+// NewMockLLBBridgeClient creates a new mock instance.
 func NewMockLLBBridgeClient(ctrl *gomock.Controller) *MockLLBBridgeClient {
 	mock := &MockLLBBridgeClient{ctrl: ctrl}
 	mock.recorder = &MockLLBBridgeClientMockRecorder{mock}
 	return mock
 }
 
-// EXPECT returns an object that allows the caller to indicate expected use
+// EXPECT returns an object that allows the caller to indicate expected use.
 func (m *MockLLBBridgeClient) EXPECT() *MockLLBBridgeClientMockRecorder {
 	return m.recorder
 }
 
-// ExecProcess mocks base method
+// ExecProcess mocks base method.
 func (m *MockLLBBridgeClient) ExecProcess(arg0 context.Context, arg1 ...grpc.CallOption) (moby_buildkit_v1_frontend.LLBBridge_ExecProcessClient, error) {
 	m.ctrl.T.Helper()
 	varargs := []interface{}{arg0}
@@ -49,14 +50,14 @@ func (m *MockLLBBridgeClient) ExecProcess(arg0 context.Context, arg1 ...grpc.Cal
 	return ret0, ret1
 }
 
-// ExecProcess indicates an expected call of ExecProcess
+// ExecProcess indicates an expected call of ExecProcess.
 func (mr *MockLLBBridgeClientMockRecorder) ExecProcess(arg0 interface{}, arg1 ...interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{arg0}, arg1...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ExecProcess", reflect.TypeOf((*MockLLBBridgeClient)(nil).ExecProcess), varargs...)
 }
 
-// Inputs mocks base method
+// Inputs mocks base method.
 func (m *MockLLBBridgeClient) Inputs(arg0 context.Context, arg1 *moby_buildkit_v1_frontend.InputsRequest, arg2 ...grpc.CallOption) (*moby_buildkit_v1_frontend.InputsResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []interface{}{arg0, arg1}
@@ -69,14 +70,14 @@ func (m *MockLLBBridgeClient) Inputs(arg0 context.Context, arg1 *moby_buildkit_v
 	return ret0, ret1
 }
 
-// Inputs indicates an expected call of Inputs
+// Inputs indicates an expected call of Inputs.
 func (mr *MockLLBBridgeClientMockRecorder) Inputs(arg0, arg1 interface{}, arg2 ...interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{arg0, arg1}, arg2...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Inputs", reflect.TypeOf((*MockLLBBridgeClient)(nil).Inputs), varargs...)
 }
 
-// NewContainer mocks base method
+// NewContainer mocks base method.
 func (m *MockLLBBridgeClient) NewContainer(arg0 context.Context, arg1 *moby_buildkit_v1_frontend.NewContainerRequest, arg2 ...grpc.CallOption) (*moby_buildkit_v1_frontend.NewContainerResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []interface{}{arg0, arg1}
@@ -89,14 +90,14 @@ func (m *MockLLBBridgeClient) NewContainer(arg0 context.Context, arg1 *moby_buil
 	return ret0, ret1
 }
 
-// NewContainer indicates an expected call of NewContainer
+// NewContainer indicates an expected call of NewContainer.
 func (mr *MockLLBBridgeClientMockRecorder) NewContainer(arg0, arg1 interface{}, arg2 ...interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{arg0, arg1}, arg2...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewContainer", reflect.TypeOf((*MockLLBBridgeClient)(nil).NewContainer), varargs...)
 }
 
-// Ping mocks base method
+// Ping mocks base method.
 func (m *MockLLBBridgeClient) Ping(arg0 context.Context, arg1 *moby_buildkit_v1_frontend.PingRequest, arg2 ...grpc.CallOption) (*moby_buildkit_v1_frontend.PongResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []interface{}{arg0, arg1}
@@ -109,14 +110,14 @@ func (m *MockLLBBridgeClient) Ping(arg0 context.Context, arg1 *moby_buildkit_v1_
 	return ret0, ret1
 }
 
-// Ping indicates an expected call of Ping
+// Ping indicates an expected call of Ping.
 func (mr *MockLLBBridgeClientMockRecorder) Ping(arg0, arg1 interface{}, arg2 ...interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{arg0, arg1}, arg2...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Ping", reflect.TypeOf((*MockLLBBridgeClient)(nil).Ping), varargs...)
 }
 
-// ReadDir mocks base method
+// ReadDir mocks base method.
 func (m *MockLLBBridgeClient) ReadDir(arg0 context.Context, arg1 *moby_buildkit_v1_frontend.ReadDirRequest, arg2 ...grpc.CallOption) (*moby_buildkit_v1_frontend.ReadDirResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []interface{}{arg0, arg1}
@@ -129,14 +130,14 @@ func (m *MockLLBBridgeClient) ReadDir(arg0 context.Context, arg1 *moby_buildkit_
 	return ret0, ret1
 }
 
-// ReadDir indicates an expected call of ReadDir
+// ReadDir indicates an expected call of ReadDir.
 func (mr *MockLLBBridgeClientMockRecorder) ReadDir(arg0, arg1 interface{}, arg2 ...interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{arg0, arg1}, arg2...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ReadDir", reflect.TypeOf((*MockLLBBridgeClient)(nil).ReadDir), varargs...)
 }
 
-// ReadFile mocks base method
+// ReadFile mocks base method.
 func (m *MockLLBBridgeClient) ReadFile(arg0 context.Context, arg1 *moby_buildkit_v1_frontend.ReadFileRequest, arg2 ...grpc.CallOption) (*moby_buildkit_v1_frontend.ReadFileResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []interface{}{arg0, arg1}
@@ -149,14 +150,14 @@ func (m *MockLLBBridgeClient) ReadFile(arg0 context.Context, arg1 *moby_buildkit
 	return ret0, ret1
 }
 
-// ReadFile indicates an expected call of ReadFile
+// ReadFile indicates an expected call of ReadFile.
 func (mr *MockLLBBridgeClientMockRecorder) ReadFile(arg0, arg1 interface{}, arg2 ...interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{arg0, arg1}, arg2...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ReadFile", reflect.TypeOf((*MockLLBBridgeClient)(nil).ReadFile), varargs...)
 }
 
-// ReleaseContainer mocks base method
+// ReleaseContainer mocks base method.
 func (m *MockLLBBridgeClient) ReleaseContainer(arg0 context.Context, arg1 *moby_buildkit_v1_frontend.ReleaseContainerRequest, arg2 ...grpc.CallOption) (*moby_buildkit_v1_frontend.ReleaseContainerResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []interface{}{arg0, arg1}
@@ -169,14 +170,14 @@ func (m *MockLLBBridgeClient) ReleaseContainer(arg0 context.Context, arg1 *moby_
 	return ret0, ret1
 }
 
-// ReleaseContainer indicates an expected call of ReleaseContainer
+// ReleaseContainer indicates an expected call of ReleaseContainer.
 func (mr *MockLLBBridgeClientMockRecorder) ReleaseContainer(arg0, arg1 interface{}, arg2 ...interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{arg0, arg1}, arg2...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ReleaseContainer", reflect.TypeOf((*MockLLBBridgeClient)(nil).ReleaseContainer), varargs...)
 }
 
-// ResolveImageConfig mocks base method
+// ResolveImageConfig mocks base method.
 func (m *MockLLBBridgeClient) ResolveImageConfig(arg0 context.Context, arg1 *moby_buildkit_v1_frontend.ResolveImageConfigRequest, arg2 ...grpc.CallOption) (*moby_buildkit_v1_frontend.ResolveImageConfigResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []interface{}{arg0, arg1}
@@ -189,14 +190,14 @@ func (m *MockLLBBridgeClient) ResolveImageConfig(arg0 context.Context, arg1 *mob
 	return ret0, ret1
 }
 
-// ResolveImageConfig indicates an expected call of ResolveImageConfig
+// ResolveImageConfig indicates an expected call of ResolveImageConfig.
 func (mr *MockLLBBridgeClientMockRecorder) ResolveImageConfig(arg0, arg1 interface{}, arg2 ...interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{arg0, arg1}, arg2...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ResolveImageConfig", reflect.TypeOf((*MockLLBBridgeClient)(nil).ResolveImageConfig), varargs...)
 }
 
-// Return mocks base method
+// Return mocks base method.
 func (m *MockLLBBridgeClient) Return(arg0 context.Context, arg1 *moby_buildkit_v1_frontend.ReturnRequest, arg2 ...grpc.CallOption) (*moby_buildkit_v1_frontend.ReturnResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []interface{}{arg0, arg1}
@@ -209,14 +210,14 @@ func (m *MockLLBBridgeClient) Return(arg0 context.Context, arg1 *moby_buildkit_v
 	return ret0, ret1
 }
 
-// Return indicates an expected call of Return
+// Return indicates an expected call of Return.
 func (mr *MockLLBBridgeClientMockRecorder) Return(arg0, arg1 interface{}, arg2 ...interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{arg0, arg1}, arg2...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Return", reflect.TypeOf((*MockLLBBridgeClient)(nil).Return), varargs...)
 }
 
-// Solve mocks base method
+// Solve mocks base method.
 func (m *MockLLBBridgeClient) Solve(arg0 context.Context, arg1 *moby_buildkit_v1_frontend.SolveRequest, arg2 ...grpc.CallOption) (*moby_buildkit_v1_frontend.SolveResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []interface{}{arg0, arg1}
@@ -229,14 +230,14 @@ func (m *MockLLBBridgeClient) Solve(arg0 context.Context, arg1 *moby_buildkit_v1
 	return ret0, ret1
 }
 
-// Solve indicates an expected call of Solve
+// Solve indicates an expected call of Solve.
 func (mr *MockLLBBridgeClientMockRecorder) Solve(arg0, arg1 interface{}, arg2 ...interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{arg0, arg1}, arg2...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Solve", reflect.TypeOf((*MockLLBBridgeClient)(nil).Solve), varargs...)
 }
 
-// StatFile mocks base method
+// StatFile mocks base method.
 func (m *MockLLBBridgeClient) StatFile(arg0 context.Context, arg1 *moby_buildkit_v1_frontend.StatFileRequest, arg2 ...grpc.CallOption) (*moby_buildkit_v1_frontend.StatFileResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []interface{}{arg0, arg1}
@@ -249,37 +250,57 @@ func (m *MockLLBBridgeClient) StatFile(arg0 context.Context, arg1 *moby_buildkit
 	return ret0, ret1
 }
 
-// StatFile indicates an expected call of StatFile
+// StatFile indicates an expected call of StatFile.
 func (mr *MockLLBBridgeClientMockRecorder) StatFile(arg0, arg1 interface{}, arg2 ...interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]interface{}{arg0, arg1}, arg2...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StatFile", reflect.TypeOf((*MockLLBBridgeClient)(nil).StatFile), varargs...)
 }
 
-// MockLLBBridge_ExecProcessClient is a mock of LLBBridge_ExecProcessClient interface
+// Warn mocks base method.
+func (m *MockLLBBridgeClient) Warn(arg0 context.Context, arg1 *moby_buildkit_v1_frontend.WarnRequest, arg2 ...grpc.CallOption) (*moby_buildkit_v1_frontend.WarnResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []interface{}{arg0, arg1}
+	for _, a := range arg2 {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "Warn", varargs...)
+	ret0, _ := ret[0].(*moby_buildkit_v1_frontend.WarnResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Warn indicates an expected call of Warn.
+func (mr *MockLLBBridgeClientMockRecorder) Warn(arg0, arg1 interface{}, arg2 ...interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]interface{}{arg0, arg1}, arg2...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Warn", reflect.TypeOf((*MockLLBBridgeClient)(nil).Warn), varargs...)
+}
+
+// MockLLBBridge_ExecProcessClient is a mock of LLBBridge_ExecProcessClient interface.
 type MockLLBBridge_ExecProcessClient struct {
 	ctrl     *gomock.Controller
 	recorder *MockLLBBridge_ExecProcessClientMockRecorder
 }
 
-// MockLLBBridge_ExecProcessClientMockRecorder is the mock recorder for MockLLBBridge_ExecProcessClient
+// MockLLBBridge_ExecProcessClientMockRecorder is the mock recorder for MockLLBBridge_ExecProcessClient.
 type MockLLBBridge_ExecProcessClientMockRecorder struct {
 	mock *MockLLBBridge_ExecProcessClient
 }
 
-// NewMockLLBBridge_ExecProcessClient creates a new mock instance
+// NewMockLLBBridge_ExecProcessClient creates a new mock instance.
 func NewMockLLBBridge_ExecProcessClient(ctrl *gomock.Controller) *MockLLBBridge_ExecProcessClient {
 	mock := &MockLLBBridge_ExecProcessClient{ctrl: ctrl}
 	mock.recorder = &MockLLBBridge_ExecProcessClientMockRecorder{mock}
 	return mock
 }
 
-// EXPECT returns an object that allows the caller to indicate expected use
+// EXPECT returns an object that allows the caller to indicate expected use.
 func (m *MockLLBBridge_ExecProcessClient) EXPECT() *MockLLBBridge_ExecProcessClientMockRecorder {
 	return m.recorder
 }
 
-// CloseSend mocks base method
+// CloseSend mocks base method.
 func (m *MockLLBBridge_ExecProcessClient) CloseSend() error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CloseSend")
@@ -287,13 +308,13 @@ func (m *MockLLBBridge_ExecProcessClient) CloseSend() error {
 	return ret0
 }
 
-// CloseSend indicates an expected call of CloseSend
+// CloseSend indicates an expected call of CloseSend.
 func (mr *MockLLBBridge_ExecProcessClientMockRecorder) CloseSend() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CloseSend", reflect.TypeOf((*MockLLBBridge_ExecProcessClient)(nil).CloseSend))
 }
 
-// Context mocks base method
+// Context mocks base method.
 func (m *MockLLBBridge_ExecProcessClient) Context() context.Context {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Context")
@@ -301,13 +322,13 @@ func (m *MockLLBBridge_ExecProcessClient) Context() context.Context {
 	return ret0
 }
 
-// Context indicates an expected call of Context
+// Context indicates an expected call of Context.
 func (mr *MockLLBBridge_ExecProcessClientMockRecorder) Context() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Context", reflect.TypeOf((*MockLLBBridge_ExecProcessClient)(nil).Context))
 }
 
-// Header mocks base method
+// Header mocks base method.
 func (m *MockLLBBridge_ExecProcessClient) Header() (metadata.MD, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Header")
@@ -316,13 +337,13 @@ func (m *MockLLBBridge_ExecProcessClient) Header() (metadata.MD, error) {
 	return ret0, ret1
 }
 
-// Header indicates an expected call of Header
+// Header indicates an expected call of Header.
 func (mr *MockLLBBridge_ExecProcessClientMockRecorder) Header() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Header", reflect.TypeOf((*MockLLBBridge_ExecProcessClient)(nil).Header))
 }
 
-// Recv mocks base method
+// Recv mocks base method.
 func (m *MockLLBBridge_ExecProcessClient) Recv() (*moby_buildkit_v1_frontend.ExecMessage, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Recv")
@@ -331,13 +352,13 @@ func (m *MockLLBBridge_ExecProcessClient) Recv() (*moby_buildkit_v1_frontend.Exe
 	return ret0, ret1
 }
 
-// Recv indicates an expected call of Recv
+// Recv indicates an expected call of Recv.
 func (mr *MockLLBBridge_ExecProcessClientMockRecorder) Recv() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Recv", reflect.TypeOf((*MockLLBBridge_ExecProcessClient)(nil).Recv))
 }
 
-// RecvMsg mocks base method
+// RecvMsg mocks base method.
 func (m *MockLLBBridge_ExecProcessClient) RecvMsg(arg0 interface{}) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "RecvMsg", arg0)
@@ -345,13 +366,13 @@ func (m *MockLLBBridge_ExecProcessClient) RecvMsg(arg0 interface{}) error {
 	return ret0
 }
 
-// RecvMsg indicates an expected call of RecvMsg
+// RecvMsg indicates an expected call of RecvMsg.
 func (mr *MockLLBBridge_ExecProcessClientMockRecorder) RecvMsg(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockLLBBridge_ExecProcessClient)(nil).RecvMsg), arg0)
 }
 
-// Send mocks base method
+// Send mocks base method.
 func (m *MockLLBBridge_ExecProcessClient) Send(arg0 *moby_buildkit_v1_frontend.ExecMessage) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Send", arg0)
@@ -359,13 +380,13 @@ func (m *MockLLBBridge_ExecProcessClient) Send(arg0 *moby_buildkit_v1_frontend.E
 	return ret0
 }
 
-// Send indicates an expected call of Send
+// Send indicates an expected call of Send.
 func (mr *MockLLBBridge_ExecProcessClientMockRecorder) Send(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Send", reflect.TypeOf((*MockLLBBridge_ExecProcessClient)(nil).Send), arg0)
 }
 
-// SendMsg mocks base method
+// SendMsg mocks base method.
 func (m *MockLLBBridge_ExecProcessClient) SendMsg(arg0 interface{}) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "SendMsg", arg0)
@@ -373,13 +394,13 @@ func (m *MockLLBBridge_ExecProcessClient) SendMsg(arg0 interface{}) error {
 	return ret0
 }
 
-// SendMsg indicates an expected call of SendMsg
+// SendMsg indicates an expected call of SendMsg.
 func (mr *MockLLBBridge_ExecProcessClientMockRecorder) SendMsg(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockLLBBridge_ExecProcessClient)(nil).SendMsg), arg0)
 }
 
-// Trailer mocks base method
+// Trailer mocks base method.
 func (m *MockLLBBridge_ExecProcessClient) Trailer() metadata.MD {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Trailer")
@@ -387,7 +408,7 @@ func (m *MockLLBBridge_ExecProcessClient) Trailer() metadata.MD {
 	return ret0
 }
 
-// Trailer indicates an expected call of Trailer
+// Trailer indicates an expected call of Trailer.
 func (mr *MockLLBBridge_ExecProcessClientMockRecorder) Trailer() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Trailer", reflect.TypeOf((*MockLLBBridge_ExecProcessClient)(nil).Trailer))
