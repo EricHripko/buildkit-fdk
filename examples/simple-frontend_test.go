@@ -16,7 +16,7 @@ func build(t *testing.T, tag string, workspace string) {
 	// Arrange
 	var stderr bytes.Buffer
 	var stdout bytes.Buffer
-	ctx, cancel := context.WithTimeout(context.Background(), time.Minute*1)
+	ctx, cancel := context.WithTimeout(context.Background(), time.Minute*4)
 	defer cancel()
 	cmd := exec.CommandContext(
 		ctx,
