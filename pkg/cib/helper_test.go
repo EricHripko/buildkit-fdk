@@ -8,11 +8,11 @@ import (
 
 	cib_mock "github.com/EricHripko/buildkit-fdk/pkg/cib/mock"
 
-	"github.com/golang/mock/gomock"
 	"github.com/moby/buildkit/frontend/gateway/client"
 	"github.com/stretchr/testify/require"
 	"github.com/stretchr/testify/suite"
 	fsutil "github.com/tonistiigi/fsutil/types"
+	"go.uber.org/mock/gomock"
 )
 
 func walkFnNoop(*fsutil.Stat) error {

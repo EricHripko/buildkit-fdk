@@ -7,10 +7,10 @@ import (
 
 	dtp_mock "github.com/EricHripko/buildkit-fdk/pkg/dtp/mock"
 
-	"github.com/golang/mock/gomock"
 	pb "github.com/moby/buildkit/frontend/gateway/pb"
 	"github.com/stretchr/testify/require"
 	"github.com/stretchr/testify/suite"
+	"go.uber.org/mock/gomock"
 	"google.golang.org/grpc"
 )
 

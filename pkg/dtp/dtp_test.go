@@ -7,11 +7,11 @@ import (
 	cib_mock "github.com/EricHripko/buildkit-fdk/pkg/cib/mock"
 	dtp_mock "github.com/EricHripko/buildkit-fdk/pkg/dtp/mock"
 
-	"github.com/golang/mock/gomock"
 	"github.com/moby/buildkit/frontend/gateway/client"
 	"github.com/moby/buildkit/frontend/gateway/grpcclient"
 	pb "github.com/moby/buildkit/frontend/gateway/pb"
 	"github.com/stretchr/testify/require"
+	"go.uber.org/mock/gomock"
 )
 
 func noOpTransform(dockerfile []byte) ([]byte, error) {

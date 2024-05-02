@@ -7,7 +7,6 @@ import (
 
 	cib_mock "github.com/EricHripko/buildkit-fdk/pkg/cib/mock"
 
-	"github.com/golang/mock/gomock"
 	"github.com/moby/buildkit/client/llb"
 	"github.com/moby/buildkit/frontend/gateway/client"
 	"github.com/moby/buildkit/solver/pb"
@@ -16,6 +15,7 @@ import (
 	specs "github.com/opencontainers/image-spec/specs-go/v1"
 	"github.com/stretchr/testify/require"
 	"github.com/stretchr/testify/suite"
+	"go.uber.org/mock/gomock"
 )
 
 // Ensure that mocks are up-to-date

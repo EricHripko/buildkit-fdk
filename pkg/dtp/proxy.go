@@ -83,3 +83,7 @@ func (proxy *dockerfileTransformingLLBProxy) ExecProcess(ctx context.Context, op
 func (proxy *dockerfileTransformingLLBProxy) Warn(ctx context.Context, in *pb.WarnRequest, opts ...grpc.CallOption) (*pb.WarnResponse, error) {
 	return proxy.client.Warn(ctx, in, opts...)
 }
+
+func (proxy *dockerfileTransformingLLBProxy) Evaluate(ctx context.Context, in *pb.EvaluateRequest, opts ...grpc.CallOption) (*pb.EvaluateResponse, error) {
+	return proxy.client.Evaluate(ctx, in, opts...)
+}
