@@ -4,7 +4,7 @@ package main
 
 import (
 	"context"
-	"io/ioutil"
+	"os"
 
 	"github.com/EricHripko/buildkit-fdk/pkg/dtp"
 
@@ -17,11 +17,11 @@ import (
 
 func build(ctx context.Context, c client.Client) (*client.Result, error) {
 	// Read vendored Dockerfiles
-	header, err := ioutil.ReadFile("header.Dockerfile")
+	header, err := os.ReadFile("header.Dockerfile")
 	if err != nil {
 		return nil, err
 	}
-	footer, err := ioutil.ReadFile("footer.Dockerfile")
+	footer, err := os.ReadFile("footer.Dockerfile")
 	if err != nil {
 		return nil, err
 	}
