@@ -5,7 +5,6 @@ go 1.18
 require (
 	github.com/containerd/containerd v1.6.16-0.20230124210447-1709cfe273d9
 	github.com/docker/distribution v2.8.1+incompatible
-	github.com/golang/mock v1.6.0
 	github.com/moby/buildkit v0.11.2
 	github.com/opencontainers/go-digest v1.0.0
 	github.com/opencontainers/image-spec v1.0.3-0.20220303224323-02efb9a75ee1
@@ -13,6 +12,7 @@ require (
 	github.com/sirupsen/logrus v1.9.0
 	github.com/stretchr/testify v1.8.0
 	github.com/tonistiigi/fsutil v0.0.0-20230105215944-fb433841cbfa
+	go.uber.org/mock v0.4.0
 	google.golang.org/grpc v1.50.1
 )
 
