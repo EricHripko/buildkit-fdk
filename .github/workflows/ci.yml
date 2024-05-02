@@ -50,7 +50,8 @@ jobs:
 
       - name: Upload coverage
         uses: codecov/codecov-action@v4
-        token: ${{ secrets.CODECOV_TOKEN }}
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Login to DockerHub
         if: ${{ github.ref == 'refs/heads/main' && success() }}
