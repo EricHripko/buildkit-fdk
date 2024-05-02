@@ -1,6 +1,6 @@
 module github.com/EricHripko/buildkit-fdk
 
-go 1.18
+go 1.21
 
 require (
 	github.com/containerd/containerd v1.6.16-0.20230124210447-1709cfe273d9
