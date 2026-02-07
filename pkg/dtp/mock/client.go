@@ -23,6 +23,7 @@ import (
 type MockLLBBridgeClient struct {
 	ctrl     *gomock.Controller
 	recorder *MockLLBBridgeClientMockRecorder
+	isgomock struct{}
 }
 
 // MockLLBBridgeClientMockRecorder is the mock recorder for MockLLBBridgeClient.
@@ -43,10 +44,10 @@ func (m *MockLLBBridgeClient) EXPECT() *MockLLBBridgeClientMockRecorder {
 }
 
 // Evaluate mocks base method.
-func (m *MockLLBBridgeClient) Evaluate(arg0 context.Context, arg1 *moby_buildkit_v1_frontend.EvaluateRequest, arg2 ...grpc.CallOption) (*moby_buildkit_v1_frontend.EvaluateResponse, error) {
+func (m *MockLLBBridgeClient) Evaluate(ctx context.Context, in *moby_buildkit_v1_frontend.EvaluateRequest, opts ...grpc.CallOption) (*moby_buildkit_v1_frontend.EvaluateResponse, error) {
 	m.ctrl.T.Helper()
-	varargs := []any{arg0, arg1}
-	for _, a := range arg2 {
+	varargs := []any{ctx, in}
+	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "Evaluate", varargs...)
@@ -56,17 +57,17 @@ func (m *MockLLBBridgeClient) Evaluate(arg0 context.Context, arg1 *moby_buildkit
 }
 
 // Evaluate indicates an expected call of Evaluate.
-func (mr *MockLLBBridgeClientMockRecorder) Evaluate(arg0, arg1 any, arg2 ...any) *gomock.Call {
+func (mr *MockLLBBridgeClientMockRecorder) Evaluate(ctx, in any, opts ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{arg0, arg1}, arg2...)
+	varargs := append([]any{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Evaluate", reflect.TypeOf((*MockLLBBridgeClient)(nil).Evaluate), varargs...)
 }
 
 // ExecProcess mocks base method.
-func (m *MockLLBBridgeClient) ExecProcess(arg0 context.Context, arg1 ...grpc.CallOption) (moby_buildkit_v1_frontend.LLBBridge_ExecProcessClient, error) {
+func (m *MockLLBBridgeClient) ExecProcess(ctx context.Context, opts ...grpc.CallOption) (moby_buildkit_v1_frontend.LLBBridge_ExecProcessClient, error) {
 	m.ctrl.T.Helper()
-	varargs := []any{arg0}
-	for _, a := range arg1 {
+	varargs := []any{ctx}
+	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "ExecProcess", varargs...)
@@ -76,17 +77,17 @@ func (m *MockLLBBridgeClient) ExecProcess(arg0 context.Context, arg1 ...grpc.Cal
 }
 
 // ExecProcess indicates an expected call of ExecProcess.
-func (mr *MockLLBBridgeClientMockRecorder) ExecProcess(arg0 any, arg1 ...any) *gomock.Call {
+func (mr *MockLLBBridgeClientMockRecorder) ExecProcess(ctx any, opts ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{arg0}, arg1...)
+	varargs := append([]any{ctx}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ExecProcess", reflect.TypeOf((*MockLLBBridgeClient)(nil).ExecProcess), varargs...)
 }
 
 // Inputs mocks base method.
-func (m *MockLLBBridgeClient) Inputs(arg0 context.Context, arg1 *moby_buildkit_v1_frontend.InputsRequest, arg2 ...grpc.CallOption) (*moby_buildkit_v1_frontend.InputsResponse, error) {
+func (m *MockLLBBridgeClient) Inputs(ctx context.Context, in *moby_buildkit_v1_frontend.InputsRequest, opts ...grpc.CallOption) (*moby_buildkit_v1_frontend.InputsResponse, error) {
 	m.ctrl.T.Helper()
-	varargs := []any{arg0, arg1}
-	for _, a := range arg2 {
+	varargs := []any{ctx, in}
+	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "Inputs", varargs...)
@@ -96,17 +97,17 @@ func (m *MockLLBBridgeClient) Inputs(arg0 context.Context, arg1 *moby_buildkit_v
 }
 
 // Inputs indicates an expected call of Inputs.
-func (mr *MockLLBBridgeClientMockRecorder) Inputs(arg0, arg1 any, arg2 ...any) *gomock.Call {
+func (mr *MockLLBBridgeClientMockRecorder) Inputs(ctx, in any, opts ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{arg0, arg1}, arg2...)
+	varargs := append([]any{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Inputs", reflect.TypeOf((*MockLLBBridgeClient)(nil).Inputs), varargs...)
 }
 
 // NewContainer mocks base method.
-func (m *MockLLBBridgeClient) NewContainer(arg0 context.Context, arg1 *moby_buildkit_v1_frontend.NewContainerRequest, arg2 ...grpc.CallOption) (*moby_buildkit_v1_frontend.NewContainerResponse, error) {
+func (m *MockLLBBridgeClient) NewContainer(ctx context.Context, in *moby_buildkit_v1_frontend.NewContainerRequest, opts ...grpc.CallOption) (*moby_buildkit_v1_frontend.NewContainerResponse, error) {
 	m.ctrl.T.Helper()
-	varargs := []any{arg0, arg1}
-	for _, a := range arg2 {
+	varargs := []any{ctx, in}
+	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "NewContainer", varargs...)
@@ -116,17 +117,17 @@ func (m *MockLLBBridgeClient) NewContainer(arg0 context.Context, arg1 *moby_buil
 }
 
 // NewContainer indicates an expected call of NewContainer.
-func (mr *MockLLBBridgeClientMockRecorder) NewContainer(arg0, arg1 any, arg2 ...any) *gomock.Call {
+func (mr *MockLLBBridgeClientMockRecorder) NewContainer(ctx, in any, opts ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{arg0, arg1}, arg2...)
+	varargs := append([]any{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "NewContainer", reflect.TypeOf((*MockLLBBridgeClient)(nil).NewContainer), varargs...)
 }
 
 // Ping mocks base method.
-func (m *MockLLBBridgeClient) Ping(arg0 context.Context, arg1 *moby_buildkit_v1_frontend.PingRequest, arg2 ...grpc.CallOption) (*moby_buildkit_v1_frontend.PongResponse, error) {
+func (m *MockLLBBridgeClient) Ping(ctx context.Context, in *moby_buildkit_v1_frontend.PingRequest, opts ...grpc.CallOption) (*moby_buildkit_v1_frontend.PongResponse, error) {
 	m.ctrl.T.Helper()
-	varargs := []any{arg0, arg1}
-	for _, a := range arg2 {
+	varargs := []any{ctx, in}
+	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "Ping", varargs...)
@@ -136,17 +137,17 @@ func (m *MockLLBBridgeClient) Ping(arg0 context.Context, arg1 *moby_buildkit_v1_
 }
 
 // Ping indicates an expected call of Ping.
-func (mr *MockLLBBridgeClientMockRecorder) Ping(arg0, arg1 any, arg2 ...any) *gomock.Call {
+func (mr *MockLLBBridgeClientMockRecorder) Ping(ctx, in any, opts ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{arg0, arg1}, arg2...)
+	varargs := append([]any{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Ping", reflect.TypeOf((*MockLLBBridgeClient)(nil).Ping), varargs...)
 }
 
 // ReadDir mocks base method.
-func (m *MockLLBBridgeClient) ReadDir(arg0 context.Context, arg1 *moby_buildkit_v1_frontend.ReadDirRequest, arg2 ...grpc.CallOption) (*moby_buildkit_v1_frontend.ReadDirResponse, error) {
+func (m *MockLLBBridgeClient) ReadDir(ctx context.Context, in *moby_buildkit_v1_frontend.ReadDirRequest, opts ...grpc.CallOption) (*moby_buildkit_v1_frontend.ReadDirResponse, error) {
 	m.ctrl.T.Helper()
-	varargs := []any{arg0, arg1}
-	for _, a := range arg2 {
+	varargs := []any{ctx, in}
+	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "ReadDir", varargs...)
@@ -156,17 +157,17 @@ func (m *MockLLBBridgeClient) ReadDir(arg0 context.Context, arg1 *moby_buildkit_
 }
 
 // ReadDir indicates an expected call of ReadDir.
-func (mr *MockLLBBridgeClientMockRecorder) ReadDir(arg0, arg1 any, arg2 ...any) *gomock.Call {
+func (mr *MockLLBBridgeClientMockRecorder) ReadDir(ctx, in any, opts ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{arg0, arg1}, arg2...)
+	varargs := append([]any{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ReadDir", reflect.TypeOf((*MockLLBBridgeClient)(nil).ReadDir), varargs...)
 }
 
 // ReadFile mocks base method.
-func (m *MockLLBBridgeClient) ReadFile(arg0 context.Context, arg1 *moby_buildkit_v1_frontend.ReadFileRequest, arg2 ...grpc.CallOption) (*moby_buildkit_v1_frontend.ReadFileResponse, error) {
+func (m *MockLLBBridgeClient) ReadFile(ctx context.Context, in *moby_buildkit_v1_frontend.ReadFileRequest, opts ...grpc.CallOption) (*moby_buildkit_v1_frontend.ReadFileResponse, error) {
 	m.ctrl.T.Helper()
-	varargs := []any{arg0, arg1}
-	for _, a := range arg2 {
+	varargs := []any{ctx, in}
+	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "ReadFile", varargs...)
@@ -176,17 +177,17 @@ func (m *MockLLBBridgeClient) ReadFile(arg0 context.Context, arg1 *moby_buildkit
 }
 
 // ReadFile indicates an expected call of ReadFile.
-func (mr *MockLLBBridgeClientMockRecorder) ReadFile(arg0, arg1 any, arg2 ...any) *gomock.Call {
+func (mr *MockLLBBridgeClientMockRecorder) ReadFile(ctx, in any, opts ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{arg0, arg1}, arg2...)
+	varargs := append([]any{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ReadFile", reflect.TypeOf((*MockLLBBridgeClient)(nil).ReadFile), varargs...)
 }
 
 // ReleaseContainer mocks base method.
-func (m *MockLLBBridgeClient) ReleaseContainer(arg0 context.Context, arg1 *moby_buildkit_v1_frontend.ReleaseContainerRequest, arg2 ...grpc.CallOption) (*moby_buildkit_v1_frontend.ReleaseContainerResponse, error) {
+func (m *MockLLBBridgeClient) ReleaseContainer(ctx context.Context, in *moby_buildkit_v1_frontend.ReleaseContainerRequest, opts ...grpc.CallOption) (*moby_buildkit_v1_frontend.ReleaseContainerResponse, error) {
 	m.ctrl.T.Helper()
-	varargs := []any{arg0, arg1}
-	for _, a := range arg2 {
+	varargs := []any{ctx, in}
+	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "ReleaseContainer", varargs...)
@@ -196,17 +197,17 @@ func (m *MockLLBBridgeClient) ReleaseContainer(arg0 context.Context, arg1 *moby_
 }
 
 // ReleaseContainer indicates an expected call of ReleaseContainer.
-func (mr *MockLLBBridgeClientMockRecorder) ReleaseContainer(arg0, arg1 any, arg2 ...any) *gomock.Call {
+func (mr *MockLLBBridgeClientMockRecorder) ReleaseContainer(ctx, in any, opts ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{arg0, arg1}, arg2...)
+	varargs := append([]any{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ReleaseContainer", reflect.TypeOf((*MockLLBBridgeClient)(nil).ReleaseContainer), varargs...)
 }
 
 // ResolveImageConfig mocks base method.
-func (m *MockLLBBridgeClient) ResolveImageConfig(arg0 context.Context, arg1 *moby_buildkit_v1_frontend.ResolveImageConfigRequest, arg2 ...grpc.CallOption) (*moby_buildkit_v1_frontend.ResolveImageConfigResponse, error) {
+func (m *MockLLBBridgeClient) ResolveImageConfig(ctx context.Context, in *moby_buildkit_v1_frontend.ResolveImageConfigRequest, opts ...grpc.CallOption) (*moby_buildkit_v1_frontend.ResolveImageConfigResponse, error) {
 	m.ctrl.T.Helper()
-	varargs := []any{arg0, arg1}
-	for _, a := range arg2 {
+	varargs := []any{ctx, in}
+	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "ResolveImageConfig", varargs...)
@@ -216,17 +217,37 @@ func (m *MockLLBBridgeClient) ResolveImageConfig(arg0 context.Context, arg1 *mob
 }
 
 // ResolveImageConfig indicates an expected call of ResolveImageConfig.
-func (mr *MockLLBBridgeClientMockRecorder) ResolveImageConfig(arg0, arg1 any, arg2 ...any) *gomock.Call {
+func (mr *MockLLBBridgeClientMockRecorder) ResolveImageConfig(ctx, in any, opts ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{arg0, arg1}, arg2...)
+	varargs := append([]any{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ResolveImageConfig", reflect.TypeOf((*MockLLBBridgeClient)(nil).ResolveImageConfig), varargs...)
 }
 
-// Return mocks base method.
-func (m *MockLLBBridgeClient) Return(arg0 context.Context, arg1 *moby_buildkit_v1_frontend.ReturnRequest, arg2 ...grpc.CallOption) (*moby_buildkit_v1_frontend.ReturnResponse, error) {
+// ResolveSourceMeta mocks base method.
+func (m *MockLLBBridgeClient) ResolveSourceMeta(ctx context.Context, in *moby_buildkit_v1_frontend.ResolveSourceMetaRequest, opts ...grpc.CallOption) (*moby_buildkit_v1_frontend.ResolveSourceMetaResponse, error) {
 	m.ctrl.T.Helper()
-	varargs := []any{arg0, arg1}
-	for _, a := range arg2 {
+	varargs := []any{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ResolveSourceMeta", varargs...)
+	ret0, _ := ret[0].(*moby_buildkit_v1_frontend.ResolveSourceMetaResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ResolveSourceMeta indicates an expected call of ResolveSourceMeta.
+func (mr *MockLLBBridgeClientMockRecorder) ResolveSourceMeta(ctx, in any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ResolveSourceMeta", reflect.TypeOf((*MockLLBBridgeClient)(nil).ResolveSourceMeta), varargs...)
+}
+
+// Return mocks base method.
+func (m *MockLLBBridgeClient) Return(ctx context.Context, in *moby_buildkit_v1_frontend.ReturnRequest, opts ...grpc.CallOption) (*moby_buildkit_v1_frontend.ReturnResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, in}
+	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "Return", varargs...)
@@ -236,17 +257,17 @@ func (m *MockLLBBridgeClient) Return(arg0 context.Context, arg1 *moby_buildkit_v
 }
 
 // Return indicates an expected call of Return.
-func (mr *MockLLBBridgeClientMockRecorder) Return(arg0, arg1 any, arg2 ...any) *gomock.Call {
+func (mr *MockLLBBridgeClientMockRecorder) Return(ctx, in any, opts ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{arg0, arg1}, arg2...)
+	varargs := append([]any{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Return", reflect.TypeOf((*MockLLBBridgeClient)(nil).Return), varargs...)
 }
 
 // Solve mocks base method.
-func (m *MockLLBBridgeClient) Solve(arg0 context.Context, arg1 *moby_buildkit_v1_frontend.SolveRequest, arg2 ...grpc.CallOption) (*moby_buildkit_v1_frontend.SolveResponse, error) {
+func (m *MockLLBBridgeClient) Solve(ctx context.Context, in *moby_buildkit_v1_frontend.SolveRequest, opts ...grpc.CallOption) (*moby_buildkit_v1_frontend.SolveResponse, error) {
 	m.ctrl.T.Helper()
-	varargs := []any{arg0, arg1}
-	for _, a := range arg2 {
+	varargs := []any{ctx, in}
+	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "Solve", varargs...)
@@ -256,17 +277,17 @@ func (m *MockLLBBridgeClient) Solve(arg0 context.Context, arg1 *moby_buildkit_v1
 }
 
 // Solve indicates an expected call of Solve.
-func (mr *MockLLBBridgeClientMockRecorder) Solve(arg0, arg1 any, arg2 ...any) *gomock.Call {
+func (mr *MockLLBBridgeClientMockRecorder) Solve(ctx, in any, opts ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{arg0, arg1}, arg2...)
+	varargs := append([]any{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Solve", reflect.TypeOf((*MockLLBBridgeClient)(nil).Solve), varargs...)
 }
 
 // StatFile mocks base method.
-func (m *MockLLBBridgeClient) StatFile(arg0 context.Context, arg1 *moby_buildkit_v1_frontend.StatFileRequest, arg2 ...grpc.CallOption) (*moby_buildkit_v1_frontend.StatFileResponse, error) {
+func (m *MockLLBBridgeClient) StatFile(ctx context.Context, in *moby_buildkit_v1_frontend.StatFileRequest, opts ...grpc.CallOption) (*moby_buildkit_v1_frontend.StatFileResponse, error) {
 	m.ctrl.T.Helper()
-	varargs := []any{arg0, arg1}
-	for _, a := range arg2 {
+	varargs := []any{ctx, in}
+	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "StatFile", varargs...)
@@ -276,17 +297,17 @@ func (m *MockLLBBridgeClient) StatFile(arg0 context.Context, arg1 *moby_buildkit
 }
 
 // StatFile indicates an expected call of StatFile.
-func (mr *MockLLBBridgeClientMockRecorder) StatFile(arg0, arg1 any, arg2 ...any) *gomock.Call {
+func (mr *MockLLBBridgeClientMockRecorder) StatFile(ctx, in any, opts ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{arg0, arg1}, arg2...)
+	varargs := append([]any{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StatFile", reflect.TypeOf((*MockLLBBridgeClient)(nil).StatFile), varargs...)
 }
 
 // Warn mocks base method.
-func (m *MockLLBBridgeClient) Warn(arg0 context.Context, arg1 *moby_buildkit_v1_frontend.WarnRequest, arg2 ...grpc.CallOption) (*moby_buildkit_v1_frontend.WarnResponse, error) {
+func (m *MockLLBBridgeClient) Warn(ctx context.Context, in *moby_buildkit_v1_frontend.WarnRequest, opts ...grpc.CallOption) (*moby_buildkit_v1_frontend.WarnResponse, error) {
 	m.ctrl.T.Helper()
-	varargs := []any{arg0, arg1}
-	for _, a := range arg2 {
+	varargs := []any{ctx, in}
+	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "Warn", varargs...)
@@ -296,9 +317,9 @@ func (m *MockLLBBridgeClient) Warn(arg0 context.Context, arg1 *moby_buildkit_v1_
 }
 
 // Warn indicates an expected call of Warn.
-func (mr *MockLLBBridgeClientMockRecorder) Warn(arg0, arg1 any, arg2 ...any) *gomock.Call {
+func (mr *MockLLBBridgeClientMockRecorder) Warn(ctx, in any, opts ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	varargs := append([]any{arg0, arg1}, arg2...)
+	varargs := append([]any{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Warn", reflect.TypeOf((*MockLLBBridgeClient)(nil).Warn), varargs...)
 }
 
@@ -306,6 +327,7 @@ func (mr *MockLLBBridgeClientMockRecorder) Warn(arg0, arg1 any, arg2 ...any) *go
 type MockLLBBridge_ExecProcessClient struct {
 	ctrl     *gomock.Controller
 	recorder *MockLLBBridge_ExecProcessClientMockRecorder
+	isgomock struct{}
 }
 
 // MockLLBBridge_ExecProcessClientMockRecorder is the mock recorder for MockLLBBridge_ExecProcessClient.
@@ -384,17 +406,17 @@ func (mr *MockLLBBridge_ExecProcessClientMockRecorder) Recv() *gomock.Call {
 }
 
 // RecvMsg mocks base method.
-func (m *MockLLBBridge_ExecProcessClient) RecvMsg(arg0 any) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "RecvMsg", arg0)
+func (m_2 *MockLLBBridge_ExecProcessClient) RecvMsg(m any) error {
+	m_2.ctrl.T.Helper()
+	ret := m_2.ctrl.Call(m_2, "RecvMsg", m)
 	ret0, _ := ret[0].(error)
 	return ret0
 }
 
 // RecvMsg indicates an expected call of RecvMsg.
-func (mr *MockLLBBridge_ExecProcessClientMockRecorder) RecvMsg(arg0 any) *gomock.Call {
+func (mr *MockLLBBridge_ExecProcessClientMockRecorder) RecvMsg(m any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockLLBBridge_ExecProcessClient)(nil).RecvMsg), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RecvMsg", reflect.TypeOf((*MockLLBBridge_ExecProcessClient)(nil).RecvMsg), m)
 }
 
 // Send mocks base method.
@@ -412,17 +434,17 @@ func (mr *MockLLBBridge_ExecProcessClientMockRecorder) Send(arg0 any) *gomock.Ca
 }
 
 // SendMsg mocks base method.
-func (m *MockLLBBridge_ExecProcessClient) SendMsg(arg0 any) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SendMsg", arg0)
+func (m_2 *MockLLBBridge_ExecProcessClient) SendMsg(m any) error {
+	m_2.ctrl.T.Helper()
+	ret := m_2.ctrl.Call(m_2, "SendMsg", m)
 	ret0, _ := ret[0].(error)
 	return ret0
 }
 
 // SendMsg indicates an expected call of SendMsg.
-func (mr *MockLLBBridge_ExecProcessClientMockRecorder) SendMsg(arg0 any) *gomock.Call {
+func (mr *MockLLBBridge_ExecProcessClientMockRecorder) SendMsg(m any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockLLBBridge_ExecProcessClient)(nil).SendMsg), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMsg", reflect.TypeOf((*MockLLBBridge_ExecProcessClient)(nil).SendMsg), m)
 }
 
 // Trailer mocks base method.
