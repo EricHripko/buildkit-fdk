@@ -12,10 +12,10 @@ import (
 	controlapi "github.com/moby/buildkit/api/services/control"
 	"github.com/moby/buildkit/client/llb"
 	"github.com/moby/buildkit/client/llb/sourceresolver"
-	"github.com/moby/buildkit/frontend/dockerfile/dockerignore"
 	"github.com/moby/buildkit/frontend/dockerui"
 	"github.com/moby/buildkit/frontend/gateway/client"
 	"github.com/moby/buildkit/util/apicaps"
+	"github.com/moby/patternmatcher/ignorefile"
 	specs "github.com/opencontainers/image-spec/specs-go/v1"
 	"github.com/pkg/errors"
 )
@@ -148,7 +148,7 @@ func (s *service) initExcludes() error {
 	if data == nil {
 		s.excludes = []string{}
 	} else {
-		excludes, err := dockerignore.ReadAll(bytes.NewBuffer(data))
+		excludes, err := ignorefile.ReadAll(bytes.NewBuffer(data))
 		if excludes == nil || err != nil {
 			return errors.Wrap(err, "failed to parse dockerignore")
 		}
