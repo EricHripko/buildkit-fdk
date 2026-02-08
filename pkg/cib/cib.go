@@ -5,7 +5,6 @@ import (
 	"context"
 
 	"github.com/moby/buildkit/client/llb"
-	"github.com/moby/buildkit/frontend/dockerfile/dockerfile2llb"
 	"github.com/moby/buildkit/frontend/gateway/client"
 	"github.com/moby/buildkit/util/apicaps"
 	specs "github.com/opencontainers/image-spec/specs-go/v1"
@@ -50,9 +49,9 @@ type Service interface {
 	SrcState() (state llb.State, err error)
 
 	// FetchImageConfig returns the configuration of the image for the given platform.
-	FetchImageConfig(name string, platform *specs.Platform) (dockerfile2llb.Image, error)
+	FetchImageConfig(name string, platform *specs.Platform) (specs.Image, error)
 	// From creates a new LLB state from the specified base image.
-	From(base string, platform *specs.Platform, comment string) (llb.State, *dockerfile2llb.Image, error)
+	From(base string, platform *specs.Platform, comment string) (llb.State, *specs.Image, error)
 	// Solve the provided LLB state and return a single reference from it.
 	Solve(ctx context.Context, state llb.State) (client.Reference, error)
 }

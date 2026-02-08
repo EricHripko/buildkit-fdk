@@ -8,6 +8,7 @@ import (
 	cib_mock "github.com/EricHripko/buildkit-fdk/pkg/cib/mock"
 
 	"github.com/moby/buildkit/client/llb"
+	"github.com/moby/buildkit/client/llb/sourceresolver"
 	"github.com/moby/buildkit/frontend/gateway/client"
 	"github.com/moby/buildkit/solver/pb"
 	"github.com/moby/buildkit/util/apicaps"
@@ -305,15 +306,17 @@ func (suite *serviceTestSuite) TestGetExcludesSucceeds() {
 func (suite *serviceTestSuite) TestFetchImageConfigResolveFails() {
 	// Arrange
 	platform := &specs.Platform{}
-	opt := llb.ResolveImageConfigOpt{
-		Platform:    platform,
-		ResolveMode: "local",
-		LogName:     "load metadata for fakeimage",
+	opt := sourceresolver.Opt{
+		Platform: platform,
+		ImageOpt: &sourceresolver.ResolveImageOpt{
+			ResolveMode: "local",
+		},
+		LogName: "load metadata for fakeimage",
 	}
 	expected := errors.New("something went wrong")
 	suite.client.EXPECT().
 		ResolveImageConfig(suite.ctx, "fakeimage", opt).
-		Return(digest.Digest("sha256:fake"), nil, expected)
+		Return("", digest.Digest("sha256:fake"), nil, expected)
 
 	// Act
 	_, actual := suite.build.FetchImageConfig("fakeimage", platform)
@@ -325,15 +328,17 @@ func (suite *serviceTestSuite) TestFetchImageConfigResolveFails() {
 func (suite *serviceTestSuite) TestFetchImageConfigUnmarshalFails() {
 	// Arrange
 	platform := &specs.Platform{}
-	opt := llb.ResolveImageConfigOpt{
-		Platform:    platform,
-		ResolveMode: "local",
-		LogName:     "load metadata for fakeimage",
+	opt := sourceresolver.Opt{
+		Platform: platform,
+		ImageOpt: &sourceresolver.ResolveImageOpt{
+			ResolveMode: "local",
+		},
+		LogName: "load metadata for fakeimage",
 	}
 	data := []byte("not json")
 	suite.client.EXPECT().
 		ResolveImageConfig(suite.ctx, "fakeimage", opt).
-		Return(digest.Digest("sha256:fake"), data, nil)
+		Return("", digest.Digest("sha256:fake"), data, nil)
 
 	// Act
 	_, err := suite.build.FetchImageConfig("fakeimage", platform)
@@ -345,15 +350,17 @@ func (suite *serviceTestSuite) TestFetchImageConfigUnmarshalFails() {
 func (suite *serviceTestSuite) TestFetchImageConfigSucceeds() {
 	// Arrange
 	platform := &specs.Platform{}
-	opt := llb.ResolveImageConfigOpt{
-		Platform:    platform,
-		ResolveMode: "local",
-		LogName:     "load metadata for fakeimage",
+	opt := sourceresolver.Opt{
+		Platform: platform,
+		ImageOpt: &sourceresolver.ResolveImageOpt{
+			ResolveMode: "local",
+		},
+		LogName: "load metadata for fakeimage",
 	}
 	data := []byte(`{"Architecture": "amd64"}`)
 	suite.client.EXPECT().
 		ResolveImageConfig(suite.ctx, "fakeimage", opt).
-		Return(digest.Digest("sha256:fake"), data, nil)
+		Return("", digest.Digest("sha256:fake"), data, nil)
 
 	// Act
 	img, err := suite.build.FetchImageConfig("fakeimage", platform)
@@ -408,15 +415,17 @@ func (suite *serviceTestSuite) TestFromInvalidReference() {
 func (suite *serviceTestSuite) TestFromSucceeds() {
 	// Arrange
 	expected := suite.build.GetBuildPlatform()
-	opt := llb.ResolveImageConfigOpt{
-		Platform:    expected,
-		ResolveMode: "local",
-		LogName:     "load metadata for docker.io/library/fakeimage:latest",
+	opt := sourceresolver.Opt{
+		Platform: expected,
+		ImageOpt: &sourceresolver.ResolveImageOpt{
+			ResolveMode: "local",
+		},
+		LogName: "load metadata for docker.io/library/fakeimage:latest",
 	}
 	data := []byte(`{"Config":{"User": "somebody","Env":["Key=Val"]}}`)
 	suite.client.EXPECT().
 		ResolveImageConfig(suite.ctx, "docker.io/library/fakeimage:latest", opt).
-		Return(digest.Digest("sha256:fake"), data, nil)
+		Return("", digest.Digest("sha256:fake"), data, nil)
 
 	// Act
 	state, img, err := suite.build.From("fakeimage", expected, "")

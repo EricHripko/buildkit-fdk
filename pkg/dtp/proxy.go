@@ -87,3 +87,7 @@ func (proxy *dockerfileTransformingLLBProxy) Warn(ctx context.Context, in *pb.Wa
 func (proxy *dockerfileTransformingLLBProxy) Evaluate(ctx context.Context, in *pb.EvaluateRequest, opts ...grpc.CallOption) (*pb.EvaluateResponse, error) {
 	return proxy.client.Evaluate(ctx, in, opts...)
 }
+
+func (proxy *dockerfileTransformingLLBProxy) ResolveSourceMeta(ctx context.Context, in *pb.ResolveSourceMetaRequest, opts ...grpc.CallOption) (*pb.ResolveSourceMetaResponse, error) {
+	return proxy.client.ResolveSourceMeta(ctx, in, opts...)
+}

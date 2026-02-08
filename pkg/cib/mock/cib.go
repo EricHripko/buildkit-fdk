@@ -14,7 +14,6 @@ import (
 	reflect "reflect"
 
 	llb "github.com/moby/buildkit/client/llb"
-	dockerfile2llb "github.com/moby/buildkit/frontend/dockerfile/dockerfile2llb"
 	client "github.com/moby/buildkit/frontend/gateway/client"
 	apicaps "github.com/moby/buildkit/util/apicaps"
 	v1 "github.com/opencontainers/image-spec/specs-go/v1"
@@ -25,6 +24,7 @@ import (
 type MockService struct {
 	ctrl     *gomock.Controller
 	recorder *MockServiceMockRecorder
+	isgomock struct{}
 }
 
 // MockServiceMockRecorder is the mock recorder for MockService.
@@ -45,34 +45,34 @@ func (m *MockService) EXPECT() *MockServiceMockRecorder {
 }
 
 // FetchImageConfig mocks base method.
-func (m *MockService) FetchImageConfig(arg0 string, arg1 *v1.Platform) (dockerfile2llb.Image, error) {
+func (m *MockService) FetchImageConfig(name string, platform *v1.Platform) (v1.Image, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "FetchImageConfig", arg0, arg1)
-	ret0, _ := ret[0].(dockerfile2llb.Image)
+	ret := m.ctrl.Call(m, "FetchImageConfig", name, platform)
+	ret0, _ := ret[0].(v1.Image)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // FetchImageConfig indicates an expected call of FetchImageConfig.
-func (mr *MockServiceMockRecorder) FetchImageConfig(arg0, arg1 any) *gomock.Call {
+func (mr *MockServiceMockRecorder) FetchImageConfig(name, platform any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "FetchImageConfig", reflect.TypeOf((*MockService)(nil).FetchImageConfig), arg0, arg1)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "FetchImageConfig", reflect.TypeOf((*MockService)(nil).FetchImageConfig), name, platform)
 }
 
 // From mocks base method.
-func (m *MockService) From(arg0 string, arg1 *v1.Platform, arg2 string) (llb.State, *dockerfile2llb.Image, error) {
+func (m *MockService) From(base string, platform *v1.Platform, comment string) (llb.State, *v1.Image, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "From", arg0, arg1, arg2)
+	ret := m.ctrl.Call(m, "From", base, platform, comment)
 	ret0, _ := ret[0].(llb.State)
-	ret1, _ := ret[1].(*dockerfile2llb.Image)
+	ret1, _ := ret[1].(*v1.Image)
 	ret2, _ := ret[2].(error)
 	return ret0, ret1, ret2
 }
 
 // From indicates an expected call of From.
-func (mr *MockServiceMockRecorder) From(arg0, arg1, arg2 any) *gomock.Call {
+func (mr *MockServiceMockRecorder) From(base, platform, comment any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "From", reflect.TypeOf((*MockService)(nil).From), arg0, arg1, arg2)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "From", reflect.TypeOf((*MockService)(nil).From), base, platform, comment)
 }
 
 // GetBuildArgs mocks base method.
@@ -264,18 +264,18 @@ func (mr *MockServiceMockRecorder) GetTargetPlatforms() *gomock.Call {
 }
 
 // Solve mocks base method.
-func (m *MockService) Solve(arg0 context.Context, arg1 llb.State) (client.Reference, error) {
+func (m *MockService) Solve(ctx context.Context, state llb.State) (client.Reference, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Solve", arg0, arg1)
+	ret := m.ctrl.Call(m, "Solve", ctx, state)
 	ret0, _ := ret[0].(client.Reference)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // Solve indicates an expected call of Solve.
-func (mr *MockServiceMockRecorder) Solve(arg0, arg1 any) *gomock.Call {
+func (mr *MockServiceMockRecorder) Solve(ctx, state any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Solve", reflect.TypeOf((*MockService)(nil).Solve), arg0, arg1)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Solve", reflect.TypeOf((*MockService)(nil).Solve), ctx, state)
 }
 
 // Src mocks base method.

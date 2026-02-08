@@ -8,14 +8,14 @@ import (
 	"strings"
 
 	"github.com/containerd/containerd/platforms"
-	"github.com/docker/distribution/reference"
+	"github.com/distribution/reference"
 	controlapi "github.com/moby/buildkit/api/services/control"
 	"github.com/moby/buildkit/client/llb"
-	dockerfile "github.com/moby/buildkit/frontend/dockerfile/builder"
-	"github.com/moby/buildkit/frontend/dockerfile/dockerfile2llb"
-	"github.com/moby/buildkit/frontend/dockerfile/dockerignore"
+	"github.com/moby/buildkit/client/llb/sourceresolver"
+	"github.com/moby/buildkit/frontend/dockerui"
 	"github.com/moby/buildkit/frontend/gateway/client"
 	"github.com/moby/buildkit/util/apicaps"
+	"github.com/moby/patternmatcher/ignorefile"
 	specs "github.com/opencontainers/image-spec/specs-go/v1"
 	"github.com/pkg/errors"
 )
@@ -44,9 +44,9 @@ func (s *service) GetClient() client.Client {
 
 func (s *service) initSrc() error {
 	// LLB
-	state := llb.Local(dockerfile.DefaultLocalNameContext,
+	state := llb.Local(dockerui.DefaultLocalNameContext,
 		llb.SessionID(s.client.BuildOpts().SessionID),
-		dockerfile2llb.WithInternalName("load context"),
+		dockerui.WithInternalName("load context"),
 	)
 	var err error
 	s.src, err = s.Solve(s.ctx, state)
@@ -98,11 +98,11 @@ func (s *service) initMetadata() error {
 	filename := s.GetMetadataFileName()
 
 	// LLB
-	state := llb.Local(dockerfile.DefaultLocalNameDockerfile,
+	state := llb.Local(dockerui.DefaultLocalNameDockerfile,
 		llb.FollowPaths([]string{filename}),
 		llb.SessionID(s.client.BuildOpts().SessionID),
-		llb.SharedKeyHint(dockerfile.DefaultLocalNameDockerfile),
-		dockerfile2llb.WithInternalName("load build definition from "+filename),
+		llb.SharedKeyHint(dockerui.DefaultLocalNameDockerfile),
+		dockerui.WithInternalName("load build definition from "+filename),
 	)
 	// Solve
 	ref, err := s.Solve(s.ctx, state)
@@ -130,11 +130,11 @@ func (s *service) GetMetadata() (data []byte, err error) {
 
 func (s *service) initExcludes() error {
 	// LLB
-	state := llb.Local(dockerfile.DefaultLocalNameContext,
+	state := llb.Local(dockerui.DefaultLocalNameContext,
 		llb.SessionID(s.client.BuildOpts().SessionID),
 		llb.FollowPaths([]string{dockerignoreFilename}),
-		llb.SharedKeyHint(dockerfile.DefaultLocalNameContext+"-"+dockerignoreFilename),
-		dockerfile2llb.WithInternalName("load "+dockerignoreFilename),
+		llb.SharedKeyHint(dockerui.DefaultLocalNameContext+"-"+dockerignoreFilename),
+		dockerui.WithInternalName("load "+dockerignoreFilename),
 	)
 	// Solve
 	ref, err := s.Solve(s.ctx, state)
@@ -148,7 +148,7 @@ func (s *service) initExcludes() error {
 	if data == nil {
 		s.excludes = []string{}
 	} else {
-		excludes, err := dockerignore.ReadAll(bytes.NewBuffer(data))
+		excludes, err := ignorefile.ReadAll(bytes.NewBuffer(data))
 		if excludes == nil || err != nil {
 			return errors.Wrap(err, "failed to parse dockerignore")
 		}
@@ -166,16 +166,18 @@ func (s *service) GetExcludes() (excludes []string, err error) {
 	return
 }
 
-func (s *service) FetchImageConfig(name string, platform *specs.Platform) (img dockerfile2llb.Image, err error) {
+func (s *service) FetchImageConfig(name string, platform *specs.Platform) (img specs.Image, err error) {
 	resolveMode, err := s.GetResolveMode()
 	if err != nil {
 		return
 	}
 
-	_, data, err := s.client.ResolveImageConfig(s.ctx, name, llb.ResolveImageConfigOpt{
-		Platform:    platform,
-		ResolveMode: resolveMode.String(),
-		LogName:     "load metadata for " + name,
+	_, _, data, err := s.client.ResolveImageConfig(s.ctx, name, sourceresolver.Opt{
+		Platform: platform,
+		ImageOpt: &sourceresolver.ResolveImageOpt{
+			ResolveMode: resolveMode.String(),
+		},
+		LogName: "load metadata for " + name,
 	})
 	if err != nil {
 		return
@@ -267,7 +269,7 @@ func (s *service) GetIgnoreCache() bool {
 	return ignoreCache
 }
 
-func (s *service) From(base string, platform *specs.Platform, comment string) (llb.State, *dockerfile2llb.Image, error) {
+func (s *service) From(base string, platform *specs.Platform, comment string) (llb.State, *specs.Image, error) {
 	// Parse
 	ref, err := reference.ParseNormalizedNamed(base)
 	if err != nil {
