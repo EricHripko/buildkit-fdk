@@ -47,12 +47,28 @@ func (proxy *dockerfileTransformingLLBProxy) ReadFile(ctx context.Context, in *p
 	return res, err
 }
 
+func (proxy *dockerfileTransformingLLBProxy) ReadFileContainer(ctx context.Context, in *pb.ReadFileRequest, opts ...grpc.CallOption) (*pb.ReadFileResponse, error) {
+	res, err := proxy.client.ReadFileContainer(ctx, in, opts...)
+	if err == nil && in.FilePath == proxy.dockerfile {
+		res.Data, err = proxy.transform(res.Data)
+	}
+	return res, err
+}
+
 func (proxy *dockerfileTransformingLLBProxy) ReadDir(ctx context.Context, in *pb.ReadDirRequest, opts ...grpc.CallOption) (*pb.ReadDirResponse, error) {
 	return proxy.client.ReadDir(ctx, in, opts...)
 }
 
+func (proxy *dockerfileTransformingLLBProxy) ReadDirContainer(ctx context.Context, in *pb.ReadDirRequest, opts ...grpc.CallOption) (*pb.ReadDirResponse, error) {
+	return proxy.client.ReadDirContainer(ctx, in, opts...)
+}
+
 func (proxy *dockerfileTransformingLLBProxy) StatFile(ctx context.Context, in *pb.StatFileRequest, opts ...grpc.CallOption) (*pb.StatFileResponse, error) {
 	return proxy.client.StatFile(ctx, in, opts...)
+}
+
+func (proxy *dockerfileTransformingLLBProxy) StatFileContainer(ctx context.Context, in *pb.StatFileRequest, opts ...grpc.CallOption) (*pb.StatFileResponse, error) {
+	return proxy.client.StatFileContainer(ctx, in, opts...)
 }
 
 func (proxy *dockerfileTransformingLLBProxy) Ping(ctx context.Context, in *pb.PingRequest, opts ...grpc.CallOption) (*pb.PongResponse, error) {

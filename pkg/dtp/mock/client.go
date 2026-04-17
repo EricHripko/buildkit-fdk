@@ -163,6 +163,46 @@ func (mr *MockLLBBridgeClientMockRecorder) ReadDir(ctx, in any, opts ...any) *go
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ReadDir", reflect.TypeOf((*MockLLBBridgeClient)(nil).ReadDir), varargs...)
 }
 
+// ReadDirContainer mocks base method.
+func (m *MockLLBBridgeClient) ReadDirContainer(ctx context.Context, in *moby_buildkit_v1_frontend.ReadDirRequest, opts ...grpc.CallOption) (*moby_buildkit_v1_frontend.ReadDirResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ReadDirContainer", varargs...)
+	ret0, _ := ret[0].(*moby_buildkit_v1_frontend.ReadDirResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ReadDirContainer indicates an expected call of ReadDirContainer.
+func (mr *MockLLBBridgeClientMockRecorder) ReadDirContainer(ctx, in any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ReadDirContainer", reflect.TypeOf((*MockLLBBridgeClient)(nil).ReadDirContainer), varargs...)
+}
+
+// ReadFileContainer mocks base method.
+func (m *MockLLBBridgeClient) ReadFileContainer(ctx context.Context, in *moby_buildkit_v1_frontend.ReadFileRequest, opts ...grpc.CallOption) (*moby_buildkit_v1_frontend.ReadFileResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "ReadFileContainer", varargs...)
+	ret0, _ := ret[0].(*moby_buildkit_v1_frontend.ReadFileResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ReadFileContainer indicates an expected call of ReadFileContainer.
+func (mr *MockLLBBridgeClientMockRecorder) ReadFileContainer(ctx, in any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ReadFileContainer", reflect.TypeOf((*MockLLBBridgeClient)(nil).ReadFileContainer), varargs...)
+}
+
 // ReadFile mocks base method.
 func (m *MockLLBBridgeClient) ReadFile(ctx context.Context, in *moby_buildkit_v1_frontend.ReadFileRequest, opts ...grpc.CallOption) (*moby_buildkit_v1_frontend.ReadFileResponse, error) {
 	m.ctrl.T.Helper()
@@ -181,6 +221,26 @@ func (mr *MockLLBBridgeClientMockRecorder) ReadFile(ctx, in any, opts ...any) *g
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, in}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ReadFile", reflect.TypeOf((*MockLLBBridgeClient)(nil).ReadFile), varargs...)
+}
+
+// StatFileContainer mocks base method.
+func (m *MockLLBBridgeClient) StatFileContainer(ctx context.Context, in *moby_buildkit_v1_frontend.StatFileRequest, opts ...grpc.CallOption) (*moby_buildkit_v1_frontend.StatFileResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "StatFileContainer", varargs...)
+	ret0, _ := ret[0].(*moby_buildkit_v1_frontend.StatFileResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// StatFileContainer indicates an expected call of StatFileContainer.
+func (mr *MockLLBBridgeClientMockRecorder) StatFileContainer(ctx, in any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "StatFileContainer", reflect.TypeOf((*MockLLBBridgeClient)(nil).StatFileContainer), varargs...)
 }
 
 // ReleaseContainer mocks base method.

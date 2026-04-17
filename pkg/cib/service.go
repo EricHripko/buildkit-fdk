@@ -173,8 +173,8 @@ func (s *service) FetchImageConfig(name string, platform *specs.Platform) (img s
 	}
 
 	_, _, data, err := s.client.ResolveImageConfig(s.ctx, name, sourceresolver.Opt{
-		Platform: platform,
 		ImageOpt: &sourceresolver.ResolveImageOpt{
+			Platform:    platform,
 			ResolveMode: resolveMode.String(),
 		},
 		LogName: "load metadata for " + name,

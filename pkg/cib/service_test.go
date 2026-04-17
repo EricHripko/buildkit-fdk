@@ -307,8 +307,8 @@ func (suite *serviceTestSuite) TestFetchImageConfigResolveFails() {
 	// Arrange
 	platform := &specs.Platform{}
 	opt := sourceresolver.Opt{
-		Platform: platform,
 		ImageOpt: &sourceresolver.ResolveImageOpt{
+			Platform:    platform,
 			ResolveMode: "local",
 		},
 		LogName: "load metadata for fakeimage",
@@ -329,8 +329,8 @@ func (suite *serviceTestSuite) TestFetchImageConfigUnmarshalFails() {
 	// Arrange
 	platform := &specs.Platform{}
 	opt := sourceresolver.Opt{
-		Platform: platform,
 		ImageOpt: &sourceresolver.ResolveImageOpt{
+			Platform:    platform,
 			ResolveMode: "local",
 		},
 		LogName: "load metadata for fakeimage",
@@ -351,8 +351,8 @@ func (suite *serviceTestSuite) TestFetchImageConfigSucceeds() {
 	// Arrange
 	platform := &specs.Platform{}
 	opt := sourceresolver.Opt{
-		Platform: platform,
 		ImageOpt: &sourceresolver.ResolveImageOpt{
+			Platform:    platform,
 			ResolveMode: "local",
 		},
 		LogName: "load metadata for fakeimage",
@@ -416,8 +416,8 @@ func (suite *serviceTestSuite) TestFromSucceeds() {
 	// Arrange
 	expected := suite.build.GetBuildPlatform()
 	opt := sourceresolver.Opt{
-		Platform: expected,
 		ImageOpt: &sourceresolver.ResolveImageOpt{
+			Platform:    expected,
 			ResolveMode: "local",
 		},
 		LogName: "load metadata for docker.io/library/fakeimage:latest",
