@@ -1,4 +1,4 @@
-# Frontend Development kit for BuildKit
+# Frontend Development kit for BuildKit!
 
 [![Go Report](https://goreportcard.com/badge/github.com/EricHripko/buildkit-fdk)](https://goreportcard.com/report/github.com/EricHripko/buildkit-fdk)
 ![CI](https://github.com/EricHripko/buildkit-fdk/actions/workflows/ci.yml/badge.svg)
