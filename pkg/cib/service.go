@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/containerd/containerd/platforms"
+	"github.com/containerd/platforms"
 	"github.com/distribution/reference"
 	controlapi "github.com/moby/buildkit/api/services/control"
 	"github.com/moby/buildkit/client/llb"
@@ -173,8 +173,8 @@ func (s *service) FetchImageConfig(name string, platform *specs.Platform) (img s
 	}
 
 	_, _, data, err := s.client.ResolveImageConfig(s.ctx, name, sourceresolver.Opt{
-		Platform: platform,
 		ImageOpt: &sourceresolver.ResolveImageOpt{
+			Platform:    platform,
 			ResolveMode: resolveMode.String(),
 		},
 		LogName: "load metadata for " + name,
@@ -243,7 +243,8 @@ func (s *service) GetCacheImports() ([]client.CacheOptionsEntry, error) {
 		if err := json.Unmarshal([]byte(cacheImportsStr), &cacheImportsUM); err != nil {
 			return nil, errors.Wrapf(err, "failed to unmarshal %s (%q)", keyCacheImports, cacheImportsStr)
 		}
-		for _, um := range cacheImportsUM {
+		for i := range cacheImportsUM {
+			um := &cacheImportsUM[i]
 			cacheImports = append(cacheImports, client.CacheOptionsEntry{Type: um.Type, Attrs: um.Attrs})
 		}
 	}
